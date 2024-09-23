@@ -15,6 +15,8 @@ public class RemyCtrl : MonoBehaviour
     [SerializeField] bool isGround = true;   // 캐릭터가 바닥에 있는지 여부
     [SerializeField] bool isSlide = false;   // 슬라이딩 여부
 
+    public bool playerDie = false;
+
     void Start()
     {
         tr = transform;
@@ -33,7 +35,6 @@ public class RemyCtrl : MonoBehaviour
         // 상하 입력
         if (moveY > 0 && isGround) StartCoroutine(Jump());
         if (moveY < 0 && !isSlide) StartCoroutine(Slide());
-
     }
 
     IEnumerator Jump()
@@ -59,7 +60,7 @@ public class RemyCtrl : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.gameObject.CompareTag("GROUND"))
+        if (col.gameObject.CompareTag("PLATFORM"))
             isGround = true;
     }
 }
