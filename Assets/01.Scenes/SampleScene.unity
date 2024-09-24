@@ -770,6 +770,71 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 167885930329769213, guid: 662d2ce4be7c456479a25f39d5bbe77c, type: 3}
   m_PrefabInstance: {fileID: 318077760}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1841419919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1841419921}
+  - component: {fileID: 1841419920}
+  m_Layer: 0
+  m_Name: ObjectPoolingManager (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1841419920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841419919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19ecd8664da4f3c4292ccd05e378a5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformList: []
+  poolSize: 30
+  platforms:
+  - {fileID: 1466766647}
+  - {fileID: 2276216390431242103, guid: df974385795bb6949922e0f0d9a242fd, type: 3}
+  - {fileID: 7081389604849241549, guid: 152e489908d92f448a0720b0a4c58e51, type: 3}
+  - {fileID: 4731809460035886385, guid: ad14be91ef19d5b4bbebbb611031bf3f, type: 3}
+  - {fileID: 6694652227999403726, guid: c9f47c92b2d3a8b45a4e60a4dc434fd2, type: 3}
+  - {fileID: 4932787191557537731, guid: 7a6b6cb0a4ff1f84d9891f586cdf5ed0, type: 3}
+  - {fileID: 1267970854108153744, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
+  - {fileID: 3748383150325379158, guid: bbbd2516d5fefaf4f8b1255323a992d6, type: 3}
+  - {fileID: 7590663274167359439, guid: 0898d2849d93dbd4fb5024e0b57d0421, type: 3}
+  _default: {fileID: 2276216390431242103, guid: df974385795bb6949922e0f0d9a242fd, type: 3}
+  bridge: {fileID: 2276216390431242103, guid: df974385795bb6949922e0f0d9a242fd, type: 3}
+  wood: {fileID: 4731809460035886385, guid: ad14be91ef19d5b4bbebbb611031bf3f, type: 3}
+  gate: {fileID: 7081389604849241549, guid: 152e489908d92f448a0720b0a4c58e51, type: 3}
+  flagShort: {fileID: 7590663274167359439, guid: 0898d2849d93dbd4fb5024e0b57d0421, type: 3}
+  flagLong: {fileID: 3748383150325379158, guid: bbbd2516d5fefaf4f8b1255323a992d6, type: 3}
+  door: {fileID: 1267970854108153744, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
+  one: {fileID: 6694652227999403726, guid: c9f47c92b2d3a8b45a4e60a4dc434fd2, type: 3}
+  twoToOne: {fileID: 4932787191557537731, guid: 7a6b6cb0a4ff1f84d9891f586cdf5ed0, type: 3}
+--- !u!4 &1841419921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841419919}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2143969425
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,3 +879,4 @@ SceneRoots:
   - {fileID: 238931208}
   - {fileID: 2143969426}
   - {fileID: 789804375}
+  - {fileID: 1841419921}
