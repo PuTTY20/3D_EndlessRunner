@@ -115,4 +115,6 @@ public class ObjectPooling : MonoBehaviour
         yield return new WaitForSeconds(2f); // 2초 대기
         platform.SetActive(false); // 플랫폼 비활성화
     }
+
+    // 다음으로 넘어갈 때 false일 때  마지막에 비활성화 이벤트 액션 delegate
 }
