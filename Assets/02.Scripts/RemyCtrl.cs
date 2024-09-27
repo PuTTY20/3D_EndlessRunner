@@ -11,7 +11,7 @@ public class RemyCtrl : MonoBehaviour
     float moveValue = 0.8f; // 좌우로 한 번에 이동하는 거리
 
     float moveY => Input.GetAxisRaw("Vertical");
-    float jumpForce = 5.0f;   // 점프 시 힘
+    float jumpForce = 5.0f;
     [SerializeField] bool isGround = true;   // 캐릭터가 바닥에 있는지 여부
     [SerializeField] bool isSlide = false;   // 슬라이딩 여부
 
@@ -25,7 +25,7 @@ public class RemyCtrl : MonoBehaviour
     }
 
     void Update()
-    {
+    {        
         // 좌우 입력
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
             tr.position += new Vector3(-moveValue, 0, 0);

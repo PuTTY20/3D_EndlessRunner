@@ -88,7 +88,7 @@ public class ObjectPooling : MonoBehaviour
 
     IEnumerator GetColSize(List<GameObject> selectedPlatform)
     {
-        for (int i = 0; i < defaultPlatformList.Count; i++)
+        for (int i = 0; i < selectedPlatform.Count; i++)
         {
             if (!selectedPlatform[i].activeInHierarchy)
             {
