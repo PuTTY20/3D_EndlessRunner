@@ -27,15 +27,11 @@ public class GameManager : MonoBehaviour
 
             // ObjectPooling에서 랜덤하게 하나의 플랫폼을 가져옴
             GameObject selectedPlatform = ObjectPooling.poolingManager.GetPlatform();
-            selectedPlatform.SetActive(true);
 
             if (selectedPlatform != null)
             {
-                // 위치 설정
+                selectedPlatform.SetActive(true);
                 selectedPlatform.transform.position = new Vector3(0, 0, 76f);
-
-                if (selectedPlatform.transform.position == Vector3.zero)
-                    ObjectPooling.poolingManager.RetunPlatformPool(selectedPlatform);
             }
 
             yield return new WaitForSeconds(5.0f);

@@ -20,83 +20,35 @@ public class ObjectPooling : MonoBehaviour
             poolingManager = this;
         else if (poolingManager != this)
             Destroy(gameObject);
-
-        StartCoroutine(CreateDefaultPool());
-        StartCoroutine(CreatebridgePool());
-        StartCoroutine(CreateOneLeftPool());
-        StartCoroutine(CreateOneRightPool());
+        
+        StartCoroutine(CreatePool(_default));
+        StartCoroutine(CreatePool(bridge));
+        StartCoroutine(CreatePool(oneLeft));
+        StartCoroutine(CreatePool(oneRight));
     }
 
-    IEnumerator CreateDefaultPool()
+    // 플랫폼 풀을 생성하는 함수
+    IEnumerator CreatePool(GameObject platformPrefab)
     {
-        GameObject defaultGroup = new GameObject("DefaultGroup");
-
         for (int i = 0; i < poolSize; i++)
         {
-            var defaultPlatform = Instantiate(_default, defaultGroup.transform);
-            defaultPlatform.SetActive(false);
-            PlatformList.Add(defaultPlatform);
+            var platform = Instantiate(platformPrefab);
+            platform.SetActive(false);
+            PlatformList.Add(platform);
         }
 
         yield return new WaitForSeconds(0.1f);
     }
 
-    IEnumerator CreatebridgePool()
-    {
-        GameObject bridgeGroup = new GameObject("BridgeGroup");
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            var bridgePlatform = Instantiate(bridge, bridgeGroup.transform);
-            bridgePlatform.SetActive(false);
-            PlatformList.Add(bridgePlatform);
-        }
-
-        yield return new WaitForSeconds(0.1f);
-    }
-
-    IEnumerator CreateOneLeftPool()
-    {
-        GameObject oneLeftGroup = new GameObject("OneLeftGroup");
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            var oneLeftPlatform = Instantiate(oneLeft, oneLeftGroup.transform);
-            oneLeftPlatform.SetActive(false);
-            PlatformList.Add(oneLeftPlatform);
-        }
-
-        yield return new WaitForSeconds(0.1f);
-    }
-
-    IEnumerator CreateOneRightPool()
-    {
-        GameObject oneRightGroup = new GameObject("OneRightGroup");
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            var oneRightPlatform = Instantiate(oneRight, oneRightGroup.transform);
-            oneRightPlatform.SetActive(false);
-            PlatformList.Add(oneRightPlatform);
-        }
-
-        yield return new WaitForSeconds(0.1f);
-    }
-
+    // 비활성화된 플랫폼을 반환하는 함수
     public GameObject GetPlatform()
     {
         foreach (GameObject platform in PlatformList)
-        {
             if (!platform.activeSelf)
                 return platform;
-        }
 
-        return null;
+        return null;  // 비활성화된 오브젝트가 없으면 null 반환
     }
 
-    public void RetunPlatformPool(GameObject platform)
-    {
-        platform.SetActive(false);
-    }
-
+    public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);
 }
