@@ -7,6 +7,7 @@ public class ObjectPooling : MonoBehaviour
     public static ObjectPooling poolingManager;
 
     public List<GameObject> PlatformList = new List<GameObject>();
+    public List<GameObject> inactivePlatforms = new List<GameObject>();
     public GameObject _default;
     public GameObject bridge;
     public GameObject oneLeft;
@@ -20,14 +21,14 @@ public class ObjectPooling : MonoBehaviour
             poolingManager = this;
         else if (poolingManager != this)
             Destroy(gameObject);
-        
+
         StartCoroutine(CreatePool(_default));
         StartCoroutine(CreatePool(bridge));
         StartCoroutine(CreatePool(oneLeft));
         StartCoroutine(CreatePool(oneRight));
     }
 
-    // 플랫폼 풀을 생성하는 함수
+    // 플랫폼 Pool을 생성하는 함수
     IEnumerator CreatePool(GameObject platformPrefab)
     {
         for (int i = 0; i < poolSize; i++)
@@ -40,14 +41,26 @@ public class ObjectPooling : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
 
-    // 비활성화된 플랫폼을 반환하는 함수
     public GameObject GetPlatform()
     {
-        foreach (GameObject platform in PlatformList)
-            if (!platform.activeSelf)
-                return platform;
+        #region 전체 리스트에서 랜덤한 플랫폼을 선택해, 이미 활성화된 플랫폼을 반환하는 문제 발생으로 코드 삭제
+        // foreach (GameObject platform in PlatformList)
+        //     if (!platform.activeSelf && !platform.activeInHierarchy)
+        //         return PlatformList[Random.Range(0, PlatformList.Count)];
+        #endregion
 
-        return null;  // 비활성화된 오브젝트가 없으면 null 반환
+        // 비활성화된 플랫폼만 리스트에 추가
+        foreach (GameObject platform in PlatformList)
+            if (!platform.activeSelf && !platform.activeInHierarchy)
+                inactivePlatforms.Add(platform);
+
+        if (inactivePlatforms.Count > 0)
+        {
+            int randomIdx = Random.Range(0, inactivePlatforms.Count);
+            return inactivePlatforms[randomIdx];
+        }
+
+        return null;
     }
 
     public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);

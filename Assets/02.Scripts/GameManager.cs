@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    Transform tr;
+    public MovePlatform _move;
+    GameObject selectedPlatform = null;
+    public float posZ = 0f;
 
     void Start()
     {
-        tr = transform;
         StartCoroutine(ActivatePlatforms());
+        _move = selectedPlatform.GetComponent<MovePlatform>();
+    }
+
+    void Update()
+    {
+        if (_move != null)
+            posZ = _move.zPos;
     }
 
     IEnumerator ActivatePlatforms()
@@ -25,13 +33,13 @@ public class GameManager : MonoBehaviour
             // selectedPlatform.SetActive(true);
             #endregion
 
-            // ObjectPooling에서 랜덤하게 하나의 플랫폼을 가져옴
-            GameObject selectedPlatform = ObjectPooling.poolingManager.GetPlatform();
+            selectedPlatform = ObjectPooling.poolingManager.GetPlatform();
 
             if (selectedPlatform != null)
             {
                 selectedPlatform.SetActive(true);
-                selectedPlatform.transform.position = new Vector3(0, 0, 76f);
+                _move = selectedPlatform.GetComponent<MovePlatform>();
+                selectedPlatform.transform.position += new Vector3(0, 0, 80f + posZ);
             }
 
             yield return new WaitForSeconds(5.0f);
