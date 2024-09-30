@@ -49,18 +49,24 @@ public class ObjectPooling : MonoBehaviour
         //         return PlatformList[Random.Range(0, PlatformList.Count)];
         #endregion
 
+        // inactivePlatforms 리스트 초기화
+        inactivePlatforms.Clear();
+
         // 비활성화된 플랫폼만 리스트에 추가
         foreach (GameObject platform in PlatformList)
-            if (!platform.activeSelf && !platform.activeInHierarchy)
+        {
+            if (!platform.activeSelf)
                 inactivePlatforms.Add(platform);
+        }
 
         if (inactivePlatforms.Count > 0)
         {
+            // 비활성화된 플랫폼 중 하나를 랜덤으로 선택
             int randomIdx = Random.Range(0, inactivePlatforms.Count);
             return inactivePlatforms[randomIdx];
         }
 
-        return null;
+        return null;  // 사용 가능한 비활성화된 플랫폼이 없으면 null 반환
     }
 
     public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);

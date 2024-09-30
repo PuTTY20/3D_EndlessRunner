@@ -15,7 +15,6 @@ public class MovePlatform : MonoBehaviour
 
     void Update()
     {
-        //StartPlatform Move And active false
         if (gameObject.CompareTag(startPlatform))
         {
             tr.position = Vector3.MoveTowards(tr.position, new Vector3(tr.position.x, tr.position.y, -6f), 10f * Time.deltaTime);

@@ -14,3 +14,6 @@
 2. 플랫폼마다 MovePlatform 스크립트를 추가해 Player는 가만히 있고 플랫폼이 움직이도록 설정
 3. ObjectPooling 스크립트에서 코드를 중복되게 사용하지 않고 함수 하나로 모든 종류의 플랫폼 Pool을 생성할 수 있도록 통합
 4. 전체 플랫폼을 반환하는 로직에서 비활성화된 플랫폼만 랜덤으로 반환하는 로직으로 수정
+
+# 240930
+1. ObjectPooling script중 GetPlatform() 함수에서 inactivePlatforms 리스트에 비활성화된 플랫폼을 추가할 때 매번 해당 리스트를 초기화하지 않으면 이전 호출 때 추가된 플랫폼이 계속 누적되어 이미 활성화된 플랫폼이 다시 선택되는 문제가 발생. 이것을 막기 위해 GetPlatform() 함수를 호출할 때마다 inactivePlatforms 리스트를 초기화하는 로직 추가

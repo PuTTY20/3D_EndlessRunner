@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     {
         if (_move != null)
             posZ = _move.zPos;
+            Debug.Log(posZ);
     }
 
     IEnumerator ActivatePlatforms()
@@ -39,10 +40,10 @@ public class GameManager : MonoBehaviour
             {
                 selectedPlatform.SetActive(true);
                 _move = selectedPlatform.GetComponent<MovePlatform>();
-                selectedPlatform.transform.position += new Vector3(0, 0, 80f + posZ);
+                selectedPlatform.transform.position = new Vector3(0, 0, 80f + posZ);
             }
 
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(4.0f);
         }
     }
 }
