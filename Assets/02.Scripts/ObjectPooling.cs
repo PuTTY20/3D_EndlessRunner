@@ -8,10 +8,23 @@ public class ObjectPooling : MonoBehaviour
 
     public List<GameObject> PlatformList = new List<GameObject>();
     public List<GameObject> inactivePlatforms = new List<GameObject>();
+
+    [Header("Platforms")]
     public GameObject _default;
     public GameObject bridge;
     public GameObject oneLeft;
     public GameObject oneRight;
+
+    [Header("Obstacle Platforms")]
+    public GameObject JumpDoor;
+    public GameObject LeftDoor;
+    public GameObject RightDoor;
+    public GameObject LeftLongFlag;
+    public GameObject LeftShortFlag;
+    public GameObject MiddleLongFlag;
+    public GameObject MiddleShortFlag;
+    public GameObject RightLongFlag;
+    public GameObject RightShortFlag;
 
     public int poolSize = 3;
 
@@ -26,6 +39,16 @@ public class ObjectPooling : MonoBehaviour
         StartCoroutine(CreatePool(bridge));
         StartCoroutine(CreatePool(oneLeft));
         StartCoroutine(CreatePool(oneRight));
+
+        StartCoroutine(CreateObstaclePool(JumpDoor));
+        StartCoroutine(CreateObstaclePool(LeftDoor));
+        StartCoroutine(CreateObstaclePool(RightDoor));
+        StartCoroutine(CreateObstaclePool(LeftLongFlag));
+        StartCoroutine(CreateObstaclePool(LeftShortFlag));
+        StartCoroutine(CreateObstaclePool(MiddleLongFlag));
+        StartCoroutine(CreateObstaclePool(MiddleShortFlag));
+        StartCoroutine(CreateObstaclePool(RightLongFlag));
+        StartCoroutine(CreateObstaclePool(RightShortFlag));
     }
 
     // 플랫폼 Pool을 생성하는 함수
@@ -38,6 +61,17 @@ public class ObjectPooling : MonoBehaviour
             PlatformList.Add(platform);
         }
 
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    IEnumerator CreateObstaclePool(GameObject obstaclePrefab)
+    {
+        for (int i = 0; i < poolSize; i++)
+        {
+            var obstacle = Instantiate(obstaclePrefab);
+            obstacle.SetActive(false);
+            inactivePlatforms.Add(obstacle);
+        }
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -67,6 +101,10 @@ public class ObjectPooling : MonoBehaviour
         }
 
         return null;  // 사용 가능한 비활성화된 플랫폼이 없으면 null 반환
+    }
+
+    public GameObject GetObstacle()
+    {
     }
 
     public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);

@@ -7,7 +7,7 @@
 1. ObjectPooling된 PlatformList들을 담을 List를 만들어 List에 추가
 
 # 240927
-1. 플랫폼마다 ObjectPooling에 않고 Grid Snapping을 사용해 플랫폼을 미리 만들어둔 후 사용
+1. 플랫폼마다 ObjectPooling하지 않고 Grid Snapping을 사용해 플랫폼을 미리 만들어둔 후 사용
 
 # 240929
 1. ObjectPooling에 맞게 GameManager 스크립트에서 플랫폼들을 Instantiate하지 않고  ObjectPooling 스크립트의 함수를 불러오도록 수정
@@ -17,3 +17,10 @@
 
 # 240930
 1. ObjectPooling script중 GetPlatform() 함수에서 inactivePlatforms 리스트에 비활성화된 플랫폼을 추가할 때 매번 해당 리스트를 초기화하지 않으면 이전 호출 때 추가된 플랫폼이 계속 누적되어 이미 활성화된 플랫폼이 다시 선택되는 문제가 발생. 이것을 막기 위해 GetPlatform() 함수를 호출할 때마다 inactivePlatforms 리스트를 초기화하는 로직 추가
+2. random obstacle
+
+
+
++속도 빨라짐
+몇미터 달렸는지 보이도록
+점프하면 카메라 위로 올라가고 내려가면 카메라 아래로 내려감
