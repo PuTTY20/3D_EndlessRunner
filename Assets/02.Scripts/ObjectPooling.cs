@@ -103,9 +103,10 @@ public class ObjectPooling : MonoBehaviour
         return null;  // 사용 가능한 비활성화된 플랫폼이 없으면 null 반환
     }
 
-    public GameObject GetObstacle()
-    {
-    }
+    // public GameObject GetObstacle()
+    // {
+
+    // }
 
     public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);
 }
