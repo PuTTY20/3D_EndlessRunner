@@ -595,6 +595,15 @@ MonoBehaviour:
   bridge: {fileID: 6750050268993384482, guid: 47f37001e90f8644f9804ab9bf55a2da, type: 3}
   oneLeft: {fileID: 3439417439843566459, guid: a66c31e8263c8324bb7f8407643a2fcb, type: 3}
   oneRight: {fileID: 1285924238289054613, guid: 4b54004bd7942c046a2dbbfbb69d9b8e, type: 3}
+  JumpDoor: {fileID: 3906063062453101317, guid: b17cc8adc47335541ba997811cbaa936, type: 3}
+  LeftDoor: {fileID: 7519706190108691951, guid: 636fdff68ac845a4e965d105ca89e955, type: 3}
+  RightDoor: {fileID: 2732931762277419379, guid: ce659a374f0694144871a82f4fd0902a, type: 3}
+  LeftLongFlag: {fileID: 8177448199515708893, guid: c83ed5c9b5168b442b3b982c64aebb29, type: 3}
+  LeftShortFlag: {fileID: 816979746307234239, guid: 83cb86625ce492d49b7ce6ecd453d859, type: 3}
+  MiddleLongFlag: {fileID: 7343818852091373841, guid: 07b556c521260d44793e2b5aeb592fc3, type: 3}
+  MiddleShortFlag: {fileID: 7611038469699666844, guid: a3bf0ac05547476419e5ab3780172b51, type: 3}
+  RightLongFlag: {fileID: 9158863095239154654, guid: 9fbf525966951c347ac66a2faf107395, type: 3}
+  RightShortFlag: {fileID: 5116604322426318668, guid: 4b7978268416a4d4b8ed7e2b9588041c, type: 3}
   poolSize: 3
 --- !u!1 &2063381936
 GameObject:
