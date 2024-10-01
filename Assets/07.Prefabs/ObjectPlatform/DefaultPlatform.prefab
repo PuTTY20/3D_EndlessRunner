@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5523395639831541281}
   m_Layer: 0
   m_Name: DefaultPlatform
-  m_TagString: Untagged
+  m_TagString: PLATFORM
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ba39c8936944543957ab84deb587d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zPos: 0
 --- !u!1001 &367495243026589007
 PrefabInstance:
   m_ObjectHideFlags: 0
