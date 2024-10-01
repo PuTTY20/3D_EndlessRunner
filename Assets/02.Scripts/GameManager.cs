@@ -1,24 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class GameManager : MonoBehaviour
 {
     public MovePlatform _move;
     GameObject selectedPlatform = null;
+    GameObject selectedObstacle = null;
     public float posZ = 0f;
 
     void Start()
     {
         StartCoroutine(ActivatePlatforms());
-        _move = selectedPlatform.GetComponent<MovePlatform>();
+        StartCoroutine(ActiveObstacle());
     }
 
     void Update()
     {
         if (_move != null)
             posZ = _move.zPos;
-            Debug.Log(posZ);
+        //Debug.Log(posZ);
     }
 
     IEnumerator ActivatePlatforms()
@@ -46,4 +48,21 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(4.0f);
         }
     }
+
+    IEnumerator ActiveObstacle()
+    {
+        while (true)
+        {
+            selectedObstacle = ObjectPooling.poolingManager.GetObstacle();
+            if (selectedObstacle != null)
+            {
+                selectedObstacle.SetActive(true);
+                selectedObstacle.transform.position = new Vector3(0f, 0, Random.Range(10f, 50f));
+                //Debug.Log(selectedObstacle.transform.position);
+            }
+            yield return new WaitForSeconds(3f);
+        }
+    }
 }
+
+//

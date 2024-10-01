@@ -7,7 +7,9 @@ public class ObjectPooling : MonoBehaviour
     public static ObjectPooling poolingManager;
 
     public List<GameObject> PlatformList = new List<GameObject>();
-    public List<GameObject> inactivePlatforms = new List<GameObject>();
+    public List<GameObject> offPlatformList = new List<GameObject>();
+    public List<GameObject> obstaclePlatformList = new List<GameObject>();
+    public List<GameObject> obstacleOffPlatformList = new List<GameObject>();
 
     [Header("Platforms")]
     public GameObject _default;
@@ -25,8 +27,11 @@ public class ObjectPooling : MonoBehaviour
     public GameObject MiddleShortFlag;
     public GameObject RightLongFlag;
     public GameObject RightShortFlag;
+    public GameObject Rock;
 
     public int poolSize = 3;
+    GameObject platformGroup;
+    GameObject obstacleGroup;
 
     void Awake()
     {
@@ -34,6 +39,9 @@ public class ObjectPooling : MonoBehaviour
             poolingManager = this;
         else if (poolingManager != this)
             Destroy(gameObject);
+
+        platformGroup = new GameObject("Platform Group");
+        obstacleGroup = new GameObject("Obstacle Group");
 
         StartCoroutine(CreatePool(_default));
         StartCoroutine(CreatePool(bridge));
@@ -49,6 +57,7 @@ public class ObjectPooling : MonoBehaviour
         StartCoroutine(CreateObstaclePool(MiddleShortFlag));
         StartCoroutine(CreateObstaclePool(RightLongFlag));
         StartCoroutine(CreateObstaclePool(RightShortFlag));
+        StartCoroutine(CreateObstaclePool(Rock));
     }
 
     // 플랫폼 Pool을 생성하는 함수
@@ -56,11 +65,10 @@ public class ObjectPooling : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            var platform = Instantiate(platformPrefab);
+            var platform = Instantiate(platformPrefab, platformGroup.transform);
             platform.SetActive(false);
             PlatformList.Add(platform);
         }
-
         yield return new WaitForSeconds(0.1f);
     }
 
@@ -68,9 +76,9 @@ public class ObjectPooling : MonoBehaviour
     {
         for (int i = 0; i < poolSize; i++)
         {
-            var obstacle = Instantiate(obstaclePrefab);
+            var obstacle = Instantiate(obstaclePrefab, obstacleGroup.transform);
             obstacle.SetActive(false);
-            inactivePlatforms.Add(obstacle);
+            obstaclePlatformList.Add(obstacle);
         }
         yield return new WaitForSeconds(0.1f);
     }
@@ -84,29 +92,42 @@ public class ObjectPooling : MonoBehaviour
         #endregion
 
         // inactivePlatforms 리스트 초기화
-        inactivePlatforms.Clear();
+        offPlatformList.Clear();
 
         // 비활성화된 플랫폼만 리스트에 추가
         foreach (GameObject platform in PlatformList)
         {
             if (!platform.activeSelf)
-                inactivePlatforms.Add(platform);
+                offPlatformList.Add(platform);
         }
 
-        if (inactivePlatforms.Count > 0)
+        if (offPlatformList.Count > 0)
         {
             // 비활성화된 플랫폼 중 하나를 랜덤으로 선택
-            int randomIdx = Random.Range(0, inactivePlatforms.Count);
-            return inactivePlatforms[randomIdx];
+            int randomIdx = Random.Range(0, offPlatformList.Count);
+            return offPlatformList[randomIdx];
         }
 
         return null;  // 사용 가능한 비활성화된 플랫폼이 없으면 null 반환
     }
 
-    // public GameObject GetObstacle()
-    // {
+    public GameObject GetObstacle()
+    {
+        obstacleOffPlatformList.Clear();
+        foreach (GameObject obstacle in obstaclePlatformList)
+        {
+            if (!obstacle.activeSelf)
+                obstacleOffPlatformList.Add(obstacle);
+        }
 
-    // }
+        if(obstacleOffPlatformList.Count > 0)
+        {
+            int randomIdx = Random.Range(0, obstacleOffPlatformList.Count);
+            return obstacleOffPlatformList[randomIdx];
+        }
+
+        return null;
+    }
 
     public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);
 }

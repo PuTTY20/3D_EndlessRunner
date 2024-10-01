@@ -26,11 +26,11 @@ public class MovePlatform : MonoBehaviour
         //PlatformMove
         else
         {
-            tr.position = Vector3.MoveTowards(tr.position, new Vector3(tr.position.x, tr.position.y, 0f), 10f * Time.deltaTime);
+            tr.position = Vector3.MoveTowards(tr.position, new Vector3(tr.position.x, tr.position.y, -5f), 10f * Time.deltaTime);
 
             zPos = tr.position.z;
 
-            if (tr.position == Vector3.zero)
+            if (tr.position == new Vector3(0f, 0f, -5f))
                 ObjectPooling.poolingManager.RetunPlatformPool(gameObject);
         }
     }

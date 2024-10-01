@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6087207769300098308}
+  - component: {fileID: -3351494110050996534}
+  - component: {fileID: 3503918880281118962}
   m_Layer: 0
   m_Name: LeftDoor
-  m_TagString: Untagged
+  m_TagString: OBSTACLE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,6 +35,40 @@ Transform:
   - {fileID: 872274687310138825}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3351494110050996534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519706190108691951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ba39c8936944543957ab84deb587d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zPos: 0
+--- !u!65 &3503918880281118962
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519706190108691951}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.53, y: 1.1999998, z: 0.31}
+  m_Center: {x: 0.39999998, y: 5.32, z: 4}
 --- !u!1001 &1642016567845032163
 PrefabInstance:
   m_ObjectHideFlags: 0
