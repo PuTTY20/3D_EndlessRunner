@@ -19,6 +19,10 @@
 1. ObjectPooling script중 GetPlatform() 함수에서 inactivePlatforms 리스트에 비활성화된 플랫폼을 추가할 때 매번 해당 리스트를 초기화하지 않으면 이전 호출 때 추가된 플랫폼이 계속 누적되어 이미 활성화된 플랫폼이 다시 선택되는 문제가 발생. 이것을 막기 위해 GetPlatform() 함수를 호출할 때마다 inactivePlatforms 리스트를 초기화하는 로직 추가
 2. random obstacle
 
+# 241001
+1. ObstacleDetect 스크립트를 만들고 Player에게 추가해 Player가 장애물을 감지
+2. 장애물을 더 정확하게 감지할 수 있도록 Jump, Slide 할 때 Player의 Collider 위치와 높이를 조절
+3. Random.insideUnitSphere를 사용해 Camera Shake
 
 
 +속도 빨라짐
