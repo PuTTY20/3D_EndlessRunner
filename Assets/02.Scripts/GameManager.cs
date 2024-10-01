@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
             if (selectedObstacle != null)
             {
                 selectedObstacle.SetActive(true);
-                selectedObstacle.transform.position = new Vector3(0f, 0, Random.Range(10f, 50f));
+                selectedObstacle.transform.position = new Vector3(0f, 0, 30f);
                 //Debug.Log(selectedObstacle.transform.position);
             }
             yield return new WaitForSeconds(3f);

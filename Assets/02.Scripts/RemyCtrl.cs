@@ -10,6 +10,7 @@ public class RemyCtrl : MonoBehaviour
     CapsuleCollider col;
 
     float moveValue = 0.8f; // 좌우로 한 번에 이동하는 거리
+    public int sct = 0;
 
     float moveY => Input.GetAxisRaw("Vertical");
     float jumpForce = 5.0f;
@@ -31,10 +32,16 @@ public class RemyCtrl : MonoBehaviour
     void Update()
     {
         // 좌우 입력
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        if (sct > -1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)))
+        {
             tr.position += new Vector3(-moveValue, 0, 0);
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+            sct -= 1;
+        }
+        if (sct < 1 && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)))
+        {
             tr.position += new Vector3(moveValue, 0, 0);
+            sct += 1;
+        }
 
         // 상하 입력
         if (moveY > 0 && isGround) StartCoroutine(Jump());
@@ -64,7 +71,7 @@ public class RemyCtrl : MonoBehaviour
         col.height = 1.4f;
 
         yield return new WaitForSeconds(1f);
-        
+
         col.center = initColCenter;
         col.height = initColHeight;
         isSlide = false;
