@@ -262,7 +262,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &238931213
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -298,7 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cfc52f3c893fb47a323a1ae9577f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sct: 0
   isGround: 1
   isSlide: 0
   playerDie: 0

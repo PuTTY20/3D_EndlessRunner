@@ -27,7 +27,6 @@ public class ObjectPooling : MonoBehaviour
     public GameObject MiddleShortFlag;
     public GameObject RightLongFlag;
     public GameObject RightShortFlag;
-    public GameObject Rock;
 
     public int poolSize = 3;
     GameObject platformGroup;
@@ -57,7 +56,6 @@ public class ObjectPooling : MonoBehaviour
         StartCoroutine(CreateObstaclePool(MiddleShortFlag));
         StartCoroutine(CreateObstaclePool(RightLongFlag));
         StartCoroutine(CreateObstaclePool(RightShortFlag));
-        StartCoroutine(CreateObstaclePool(Rock));
     }
 
     // 플랫폼 Pool을 생성하는 함수

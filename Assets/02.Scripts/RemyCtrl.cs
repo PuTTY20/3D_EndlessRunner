@@ -9,15 +9,13 @@ public class RemyCtrl : MonoBehaviour
     Animator ani;
     CapsuleCollider col;
 
-    float moveValue = 0.8f; // 좌우로 한 번에 이동하는 거리
-    public int sct = 0;
-
-    float moveY => Input.GetAxisRaw("Vertical");
-    float jumpForce = 5.0f;
-    [SerializeField] bool isGround = true;   // 캐릭터가 바닥에 있는지 여부
-    [SerializeField] bool isSlide = false;   // 슬라이딩 여부
     Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
     float initColHeight = 3.8f;
+    float moveValue = 0.8f;
+    float jumpForce = 5.0f;
+    public bool isGround = true;
+    public bool isSlide = false;
+    float moveY => Input.GetAxisRaw("Vertical");
 
     public bool playerDie = false;
 
@@ -31,17 +29,19 @@ public class RemyCtrl : MonoBehaviour
 
     void Update()
     {
+        // 현재 위치 값 가져오기
+        Vector3 currentPosition = tr.position;
+
         // 좌우 입력
-        if (sct > -1 && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)))
-        {
-            tr.position += new Vector3(-moveValue, 0, 0);
-            sct -= 1;
-        }
-        if (sct < 1 && (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)))
-        {
-            tr.position += new Vector3(moveValue, 0, 0);
-            sct += 1;
-        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && currentPosition.x > -0.8f)
+            currentPosition.x -= moveValue; // 좌측 이동
+
+        if (Input.GetKeyDown(KeyCode.RightArrow) && currentPosition.x < 0.8f)
+            currentPosition.x += moveValue; // 우측 이동
+
+        currentPosition.x = Mathf.Clamp(currentPosition.x, -0.8f, 0.8f);
+        currentPosition.z = 0f;
+        tr.position = currentPosition;
 
         // 상하 입력
         if (moveY > 0 && isGround) StartCoroutine(Jump());
@@ -52,7 +52,7 @@ public class RemyCtrl : MonoBehaviour
     {
         ani.SetTrigger("Jump");
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        isGround = false;
+        isGround = false; // 점프 시 isGround를 false로 설정
         col.center = new Vector3(0f, 2.3f, 0f);
         col.height = initColHeight / 2f;
 
@@ -60,7 +60,6 @@ public class RemyCtrl : MonoBehaviour
 
         col.center = initColCenter;
         col.height = initColHeight;
-        isGround = true;
     }
 
     IEnumerator Slide()
@@ -81,5 +80,12 @@ public class RemyCtrl : MonoBehaviour
     {
         if (col.gameObject.CompareTag("PLATFORM"))
             isGround = true;
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+        // 플랫폼에서 나갈 때 isGround를 false로 설정
+        if (col.gameObject.CompareTag("PLATFORM"))
+            isGround = false;
     }
 }
