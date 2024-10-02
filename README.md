@@ -24,6 +24,11 @@
 2. 장애물을 더 정확하게 감지할 수 있도록 Jump, Slide 할 때 Player의 Collider 위치와 높이를 조절
 3. Random.insideUnitSphere를 사용해 Camera Shake
 
+# 241002
+1. 무한점프 막기
+
+
+
 
 +속도 빨라짐
 몇미터 달렸는지 보이도록
