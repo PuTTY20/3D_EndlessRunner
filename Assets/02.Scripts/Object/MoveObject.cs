@@ -7,30 +7,32 @@ public class MoveObject : MonoBehaviour
     Transform tr;
     string startPlatform = "START";
     public float zPos = 0f;
+    Vector3 targetPos;
 
     void Start()
     {
         tr = transform;
+        targetPos = new Vector3(tr.position.x, tr.position.y, -5f);
     }
 
     void Update()
     {
         if (gameObject.CompareTag(startPlatform))
         {
-            tr.position = Vector3.MoveTowards(tr.position, new Vector3(tr.position.x, tr.position.y, -6f), 10f * Time.deltaTime);
+            tr.position = Vector3.MoveTowards(tr.position, targetPos, 10f * Time.deltaTime);
 
-            if (tr.position == new Vector3(tr.position.x, tr.position.y, -6f))
+            if (tr.position == targetPos)
                 this.gameObject.SetActive(false);
         }
 
         //PlatformMove
         else
         {
-            tr.position = Vector3.MoveTowards(tr.position, new Vector3(tr.position.x, tr.position.y, -5f), 10f * Time.deltaTime);
+            tr.position = Vector3.MoveTowards(tr.position, targetPos, 10f * Time.deltaTime);
 
             zPos = tr.position.z;
 
-            if (tr.position == new Vector3(0f, 0f, -5f))
+            if (tr.position == targetPos)
                 ObjectPooling.poolingManager.RetunPlatformPool(gameObject);
         }
     }
