@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6087207769300098308}
   - component: {fileID: -3351494110050996534}
+  - component: {fileID: 4550020343452951780}
   m_Layer: 0
   m_Name: LeftDoor
   m_TagString: Untagged
@@ -47,6 +48,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zPos: 0
+--- !u!114 &4550020343452951780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519706190108691951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec4380f554b82a4984fd8063156cbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1642016567845032163
 PrefabInstance:
   m_ObjectHideFlags: 0

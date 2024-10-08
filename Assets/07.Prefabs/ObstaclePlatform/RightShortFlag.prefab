@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467086975277048521}
   - component: {fileID: -4439783821345124833}
+  - component: {fileID: -5962439639683971140}
   m_Layer: 0
   m_Name: RightShortFlag
   m_TagString: Untagged
@@ -48,6 +49,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zPos: 0
+--- !u!114 &-5962439639683971140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5116604322426318668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec4380f554b82a4984fd8063156cbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &132236940977680558
 PrefabInstance:
   m_ObjectHideFlags: 0
