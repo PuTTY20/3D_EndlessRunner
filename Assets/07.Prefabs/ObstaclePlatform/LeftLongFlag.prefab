@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -109229827781560989}
   m_Layer: 0
   m_Name: LeftLongFlag
-  m_TagString: OBSTACLE
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4561933328118475500, guid: bbbd2516d5fefaf4f8b1255323a992d6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.7
+      value: 4.74
       objectReference: {fileID: 0}
     - target: {fileID: 4561933328118475500, guid: bbbd2516d5fefaf4f8b1255323a992d6, type: 3}
       propertyPath: m_LocalPosition.z

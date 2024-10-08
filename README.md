@@ -32,7 +32,8 @@
 2. 달린 기록 표시
 - 점수가 너무 빠르게 증가하는 문제를 해결하기 위해, 소수점 이하 값을 일정하게 축적해서 일정 값 이상이 되면 정수로 변환
 3. OnCollisionExit()대신 IEnumerator Jump()로 isGroud true, false 관리
-4. Platform으로 Raycast를 쏴 Platform이 없으면 Obstacle 삭제
+4. Platform으로 Raycast를 아래로 쏴 Platform이 없으면 Obstacle setActive(false)
+너무 가까우면 감지를 하지 못해 위치를 ray의 origin 위치를 약간 올림
 
 
 
