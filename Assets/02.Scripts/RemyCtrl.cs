@@ -103,4 +103,14 @@ public class RemyCtrl : MonoBehaviour
         if (col.gameObject.CompareTag("PLATFORM"))
             isGround = true;
     }
+
+    // 이 코드로 인해 isGound가 깜빡여 정확한 점프가 불가능해 코드 삭제, Jump()에서 isGound false 처리
+    // void OnCollisionExit(Collision col)
+    // {
+    //     // 플랫폼에서 나가면 isGround를 false로 설정
+    //     if (col.gameObject.CompareTag("PLATFORM"))
+    //     {
+    //         isGround = false;
+    //     }
+    // }
 }

@@ -27,6 +27,12 @@
 # 241002
 1. 무한점프 막기
 
+# 241008
+1. 플랫폼 겹치는 문제 수정
+2. 달린 기록 표시
+3. OnCollisionExit()대신 IEnumerator Jump()로 isGroud true, false 관리
+4. Platform으로 Raycast를 쏴 Platform이 없으면 Obstacle 삭제
+
 
 
 
@@ -37,7 +43,3 @@
 플랫폼 좀 더 느리게
 저 돌 고치고
 처음에는 장애물 조금나ㄱ오고 나중가면갈수록 빈번하게 (wait 
-점프했을 때 콜라이더 위치 발에서 머리로 올림
-무한 점프 막기
-
-player mathf 절대값으로 고정
