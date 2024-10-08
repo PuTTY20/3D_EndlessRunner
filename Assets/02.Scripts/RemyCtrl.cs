@@ -101,17 +101,6 @@ public class RemyCtrl : MonoBehaviour
     {
         // 플랫폼과 충돌하면 isGround를 true로 설정
         if (col.gameObject.CompareTag("PLATFORM"))
-        {
             isGround = true;
-        }
-    }
-
-    void OnCollisionExit(Collision col)
-    {
-        // 플랫폼에서 나가면 isGround를 false로 설정
-        if (col.gameObject.CompareTag("PLATFORM"))
-        {
-            isGround = false;
-        }
     }
 }
