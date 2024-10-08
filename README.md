@@ -35,6 +35,8 @@
 4. Platform으로 Raycast를 아래로 쏴 Platform이 없으면 Obstacle setActive(false)
 너무 가까우면 감지를 하지 못해 위치를 ray의 origin 위치를 약간 올림
 
+setActive false gameManager 수정
+
 
 
 
