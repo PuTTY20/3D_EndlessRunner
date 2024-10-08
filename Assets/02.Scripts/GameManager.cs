@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
             {
                 selectedPlatform.SetActive(true);
                 _move = selectedPlatform.GetComponent<MovePlatform>();
-                selectedPlatform.transform.position = new Vector3(0, 0, 80f + posZ);
+                selectedPlatform.transform.position = new Vector3(0, 0, 84f + posZ);
             }
 
             yield return new WaitForSeconds(4.0f);

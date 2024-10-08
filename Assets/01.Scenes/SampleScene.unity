@@ -298,9 +298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25cfc52f3c893fb47a323a1ae9577f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score_txt: {fileID: 0}
+  score: 0
   isGround: 1
   isSlide: 0
-  playerDie: 0
+  isDie: 0
+  isPlatform: 1
 --- !u!114 &238931216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,7 +695,6 @@ MonoBehaviour:
   MiddleShortFlag: {fileID: 7611038469699666844, guid: a3bf0ac05547476419e5ab3780172b51, type: 3}
   RightLongFlag: {fileID: 9158863095239154654, guid: 9fbf525966951c347ac66a2faf107395, type: 3}
   RightShortFlag: {fileID: 5116604322426318668, guid: 4b7978268416a4d4b8ed7e2b9588041c, type: 3}
-  Rock: {fileID: 3203802462663596444, guid: 628eaf14eaa1f3243a6a86d4b1452575, type: 3}
   poolSize: 3
 --- !u!1 &1439627594
 GameObject:
@@ -1023,7 +1025,7 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 238931208}
   - {fileID: 294599942}
-  - {fileID: 2063381937}
   - {fileID: 1325043684}
   - {fileID: 1926230280}
   - {fileID: 789287841}
+  - {fileID: 2063381937}

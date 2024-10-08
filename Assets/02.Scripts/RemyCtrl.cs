@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RemyCtrl : MonoBehaviour
 {
@@ -8,15 +9,18 @@ public class RemyCtrl : MonoBehaviour
     Rigidbody rb;
     Animator ani;
     CapsuleCollider col;
+    [SerializeField] Text score_txt;
+
     Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
-    
     float moveY => Input.GetAxisRaw("Vertical");
     float initColHeight = 3.8f;
     float moveValue = 0.8f;
     float jumpForce = 5.0f;
+    public int score = 0;
     public bool isGround = true;
     public bool isSlide = false;
-    public bool playerDie = false;
+    public bool isDie = false;
+    public bool isPlatform = false;
 
     void Start()
     {
@@ -24,6 +28,7 @@ public class RemyCtrl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         col = GetComponent<CapsuleCollider>();
+        score_txt = GameObject.Find("Canvas").transform.GetChild(0).GetChild(0).GetComponent<Text>();
     }
 
     void Update()
@@ -31,6 +36,13 @@ public class RemyCtrl : MonoBehaviour
         // 좌우 이동 처리
         MoveHorizontal();
 
+        if (!isDie)
+        {
+            score += Mathf.FloorToInt(Time.deltaTime * 10); // 초당 점수 증가량 설정
+            score_txt.text = $"{score}M";
+        }
+
+        // 점프 및 슬라이드 입력 처리
         if (moveY > 0 && isGround) 
             StartCoroutine(Jump());
         if (moveY < 0 && !isSlide) 
@@ -91,7 +103,6 @@ public class RemyCtrl : MonoBehaviour
         if (col.gameObject.CompareTag("PLATFORM"))
         {
             isGround = true;
-            Debug.Log(isGround);
         }
     }
 
@@ -101,7 +112,6 @@ public class RemyCtrl : MonoBehaviour
         if (col.gameObject.CompareTag("PLATFORM"))
         {
             isGround = false;
-            Debug.Log(isGround);
         }
     }
 }
