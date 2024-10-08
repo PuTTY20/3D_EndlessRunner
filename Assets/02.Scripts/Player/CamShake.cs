@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObstacleDetect : MonoBehaviour
+public class CamShake : MonoBehaviour
 {
     Transform tr;
     Camera cam;
