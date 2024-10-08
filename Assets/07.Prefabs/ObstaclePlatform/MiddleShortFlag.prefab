@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4772868851955344319}
   - component: {fileID: 3371662104958621728}
-  - component: {fileID: 1318598046970401198}
   m_Layer: 0
   m_Name: MiddleShortFlag
   m_TagString: Untagged
@@ -49,18 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zPos: 0
---- !u!114 &1318598046970401198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7611038469699666844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ec4380f554b82a4984fd8063156cbcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &850828950604228757
 PrefabInstance:
   m_ObjectHideFlags: 0

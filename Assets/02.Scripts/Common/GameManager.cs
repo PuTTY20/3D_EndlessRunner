@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
             if (selectedObstacle != null)
             {
                 selectedObstacle.SetActive(true);
+                
+                int idx = selectedObstacle.transform.childCount;
+                for (int i = 0; i < idx; i++)
+                    selectedObstacle.transform.GetChild(i).gameObject.SetActive(true);
+
                 selectedObstacle.transform.position = new Vector3(0f, 0, 30f);
                 //Debug.Log(selectedObstacle.transform.position);
             }
