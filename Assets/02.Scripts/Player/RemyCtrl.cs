@@ -16,6 +16,7 @@ public class RemyCtrl : MonoBehaviour
     float initColHeight = 3.8f;
     float moveValue = 0.8f;
     float jumpForce = 5.0f;
+    float deciamlScore = 0f;
     public int score = 0;
     public bool isGround = true;
     public bool isSlide = false;
@@ -37,17 +38,27 @@ public class RemyCtrl : MonoBehaviour
         MoveHorizontal();
 
         if (!isDie)
-        {
-            score += Mathf.FloorToInt(Time.deltaTime * 10); // 초당 점수 증가량 설정
-            score_txt.text = $"{score}M";
-        }
+            IncreaseScore();
 
         // 점프 및 슬라이드 입력 처리
-        if (moveY > 0 && isGround) 
+        if (moveY > 0 && isGround)
             StartCoroutine(Jump());
-        if (moveY < 0 && !isSlide) 
+        if (moveY < 0 && !isSlide)
             StartCoroutine(Slide());
     }
+
+    void IncreaseScore()
+    {
+        deciamlScore += Time.deltaTime * 1; // 초당 1점씩 증가
+        if (deciamlScore >= 1f)
+        {
+            score += (int)deciamlScore; // 정수 부분만큼 점수(score)에 더함
+            deciamlScore -= Mathf.Floor(deciamlScore); // 정수로 더해진 값 만큼 deciamlScore에서 뺌
+        }
+        score_txt.text = $"{score}M";
+    }
+
+
 
     void MoveHorizontal()
     {

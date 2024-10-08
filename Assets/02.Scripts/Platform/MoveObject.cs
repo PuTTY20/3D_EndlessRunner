@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlatform : MonoBehaviour
+public class MoveObject : MonoBehaviour
 {
     Transform tr;
     string startPlatform = "START";

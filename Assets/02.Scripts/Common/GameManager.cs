@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class GameManager : MonoBehaviour
 {
-    public MovePlatform _move;
+    public MoveObject _move;
     GameObject selectedPlatform = null;
     GameObject selectedObstacle = null;
     public float posZ = 0f;
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
             if (selectedPlatform != null)
             {
                 selectedPlatform.SetActive(true);
-                _move = selectedPlatform.GetComponent<MovePlatform>();
+                _move = selectedPlatform.GetComponent<MoveObject>();
                 selectedPlatform.transform.position = new Vector3(0, 0, 84f + posZ);
             }
 
