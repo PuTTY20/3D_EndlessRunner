@@ -8,6 +8,8 @@ public class MoveObject : MonoBehaviour
     string startPlatform = "START";
     public float zPos = 0f;
     Vector3 targetPos;
+    float speed = 7f;
+
 
     void Start()
     {
@@ -19,7 +21,7 @@ public class MoveObject : MonoBehaviour
     {
         if (gameObject.CompareTag(startPlatform))
         {
-            tr.position = Vector3.MoveTowards(tr.position, targetPos, 10f * Time.deltaTime);
+            tr.position = Vector3.MoveTowards(tr.position, targetPos, 7f * Time.deltaTime);
 
             if (tr.position == targetPos)
                 this.gameObject.SetActive(false);
@@ -27,13 +29,16 @@ public class MoveObject : MonoBehaviour
 
         //PlatformMove
         else
-        {
-            tr.position = Vector3.MoveTowards(tr.position, targetPos, 10f * Time.deltaTime);
+            MovePlatform();
+    }
 
-            zPos = tr.position.z;
+    public void MovePlatform()
+    {
+        tr.position = Vector3.MoveTowards(tr.position, targetPos, speed * Time.deltaTime);
 
-            if (tr.position == targetPos)
-                ObjectPooling.poolingManager.RetunPlatformPool(gameObject);
-        }
+        zPos = tr.position.z;
+
+        if (tr.position == targetPos)
+            ObjectPooling.poolingManager.RetunPlatformPool(gameObject);
     }
 }
