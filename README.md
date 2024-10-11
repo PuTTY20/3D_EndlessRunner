@@ -34,7 +34,10 @@
 3. OnCollisionExit()대신 IEnumerator Jump()로 isGroud true, false 관리
 4. Platform으로 Raycast를 아래로 쏴 Platform이 없으면 Obstacle setActive(false)
 너무 가까우면 감지를 하지 못해 위치를 ray의 origin 위치를 약간 올림
-5. ObstacleCtrl에서 Platform을 감지하지 못해 setActive(false)된 자식 object가 다시 pool로 들어갔을 때 켜지기위해 GameManager 스크립트의 ActiveObstacle()에서 childCount로 setActive(true) 로직 추가
+5. Obstacle이 Platform을 감지하지 못해 setActive(false)된 자식 object가 Pool로 들어가 다시 켜질 때 setActive(true)가 되지 않는 문제를 해결하기 위해 GameManager 스크립트의 ActiveObstacle()에서 for문을 사용해 Obstacle의 childCount를 SetActive(true)로 설정
+
+# 241011
+
 
 
 
