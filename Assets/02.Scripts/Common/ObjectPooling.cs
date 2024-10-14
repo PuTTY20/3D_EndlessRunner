@@ -6,31 +6,31 @@ public class ObjectPooling : MonoBehaviour
 {
     public static ObjectPooling poolingManager;
 
-    public List<GameObject> PlatformList = new List<GameObject>();
-    public List<GameObject> offPlatformList = new List<GameObject>();
-    public List<GameObject> obstaclePlatformList = new List<GameObject>();
-    public List<GameObject> obstacleOffPlatformList = new List<GameObject>();
+    List<GameObject> PlatformList = new List<GameObject>();
+    List<GameObject> offPlatformList = new List<GameObject>();
+    List<GameObject> obstaclePlatformList = new List<GameObject>();
+    List<GameObject> obstacleOffPlatformList = new List<GameObject>();
 
     [Header("Platforms")]
-    public GameObject _default;
-    public GameObject bridge;
-    public GameObject oneLeft;
-    public GameObject oneRight;
+    GameObject _default;
+    GameObject bridge;
+    GameObject oneLeft;
+    GameObject oneRight;
 
     [Header("Obstacle Platforms")]
-    public GameObject JumpDoor;
-    public GameObject LeftDoor;
-    public GameObject RightDoor;
-    public GameObject LeftLongFlag;
-    public GameObject LeftShortFlag;
-    public GameObject MiddleLongFlag;
-    public GameObject MiddleShortFlag;
-    public GameObject RightLongFlag;
-    public GameObject RightShortFlag;
+    GameObject JumpDoor;
+    GameObject LeftDoor;
+    GameObject RightDoor;
+    GameObject LeftLongFlag;
+    GameObject LeftShortFlag;
+    GameObject MiddleLongFlag;
+    GameObject MiddleShortFlag;
+    GameObject RightLongFlag;
+    GameObject RightShortFlag;
 
-    public int poolSize = 3;
     GameObject platformGroup;
     GameObject obstacleGroup;
+    int poolSize = 3;
 
     void Awake()
     {
@@ -39,13 +39,28 @@ public class ObjectPooling : MonoBehaviour
         else if (poolingManager != this)
             Destroy(gameObject);
 
+        _default = Resources.Load<GameObject>("ObjectPlatform/DefaultPlatform");
+        bridge = Resources.Load<GameObject>("ObjectPlatform/BridgePlatform");
+        oneLeft = Resources.Load<GameObject>("ObjectPlatform/OneLeftPlatform");
+        oneRight = Resources.Load<GameObject>("ObjectPlatform/OneRightPlatform");
+
+        JumpDoor = Resources.Load<GameObject>("ObstaclePlatform/JumpDoor");
+        LeftDoor = Resources.Load<GameObject>("ObstaclePlatform/LeftDoor");
+        RightDoor = Resources.Load<GameObject>("ObstaclePlatform/RightDoor");
+        LeftLongFlag = Resources.Load<GameObject>("ObstaclePlatform/LeftLongFlag");
+        LeftShortFlag = Resources.Load<GameObject>("ObstaclePlatform/LeftShortFlag");
+        MiddleLongFlag = Resources.Load<GameObject>("ObstaclePlatform/MiddleLongFlag");
+        MiddleShortFlag = Resources.Load<GameObject>("ObstaclePlatform/MiddleShortFlag");
+        RightLongFlag = Resources.Load<GameObject>("ObstaclePlatform/RightLongFlag");
+        RightShortFlag = Resources.Load<GameObject>("ObstaclePlatform/RightShortFlag");
+
         platformGroup = new GameObject("Platform Group");
         obstacleGroup = new GameObject("Obstacle Group");
 
-        StartCoroutine(CreatePool(_default));
-        StartCoroutine(CreatePool(bridge));
-        StartCoroutine(CreatePool(oneLeft));
-        StartCoroutine(CreatePool(oneRight));
+        StartCoroutine(CreatePlatformPool(_default));
+        StartCoroutine(CreatePlatformPool(bridge));
+        StartCoroutine(CreatePlatformPool(oneLeft));
+        StartCoroutine(CreatePlatformPool(oneRight));
 
         StartCoroutine(CreateObstaclePool(JumpDoor));
         StartCoroutine(CreateObstaclePool(LeftDoor));
@@ -59,7 +74,7 @@ public class ObjectPooling : MonoBehaviour
     }
 
     // 플랫폼 Pool을 생성하는 함수
-    IEnumerator CreatePool(GameObject platformPrefab)
+    IEnumerator CreatePlatformPool(GameObject platformPrefab)
     {
         for (int i = 0; i < poolSize; i++)
         {

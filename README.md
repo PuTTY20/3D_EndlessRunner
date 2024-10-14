@@ -36,14 +36,12 @@
 너무 가까우면 감지를 하지 못해 위치를 ray의 origin 위치를 약간 올림
 5. Obstacle이 Platform을 감지하지 못해 setActive(false)된 자식 object가 Pool로 들어가 다시 켜질 때 setActive(true)가 되지 않는 문제를 해결하기 위해 GameManager 스크립트의 ActiveObstacle()에서 for문을 사용해 Obstacle의 childCount를 SetActive(true)로 설정
 
-# 241011
+# 241014
+1. 플랫폼 움직이는 속도를 3단계로 나누어 난이도 조절
 
 
 
 
 
-+속도 빨라짐
 점프하면 카메라 위로 올라가고 내려가면 카메라 아래로 내려감
-
-플랫폼 좀 더 느리게
 처음에는 장애물 조금나ㄱ오고 나중가면갈수록 빈번하게 (wait 
