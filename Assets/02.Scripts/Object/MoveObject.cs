@@ -8,12 +8,16 @@ public class MoveObject : MonoBehaviour
     string startPlatform = "START";
     public float zPos = 0f;
     Vector3 targetPos;
-    float speed = 7f;
+    float speed = 0f;
+    float initSpeed = 7f;
+    float midleSpeed = 10.5f;      //1.5배 증가
+    float maxSpeed = 15.75f;    //2.25배 증가
 
 
     void Start()
     {
         tr = transform;
+        speed = initSpeed;
         targetPos = new Vector3(tr.position.x, tr.position.y, -5f);
     }
 
@@ -34,6 +38,16 @@ public class MoveObject : MonoBehaviour
 
     public void MovePlatform()
     {
+        if(GameManager.instance.score > 200)
+        {
+            speed = maxSpeed;
+            Debug.Log(speed);
+        }
+        else if(GameManager.instance.score > 100)
+        {
+            speed = midleSpeed;
+            Debug.Log(speed);
+        }
         tr.position = Vector3.MoveTowards(tr.position, targetPos, speed * Time.deltaTime);
 
         zPos = tr.position.z;

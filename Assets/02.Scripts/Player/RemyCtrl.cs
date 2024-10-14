@@ -9,20 +9,18 @@ public class RemyCtrl : MonoBehaviour
     Rigidbody rb;
     Animator ani;
     CapsuleCollider col;
-    [SerializeField] Text score_txt;
 
     Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
+    Vector3 targetPos;  // 목표 위치
+
     float initColHeight = 3.8f;
     float moveValue = 0.8f;
     float jumpForce = 10f;
-    float deciamlScore = 0f;
-    public int score = 0;
     public bool isGround = true;
     public bool isSlide = false;
     public bool isDie = false;
     public bool isPlatform = false;
-    Vector3 targetPos;  // 목표 위치
-    float damping = 5f;  // 부드럽게 이동할 속도
+    float damping = 5f;
 
     void Start()
     {
@@ -30,7 +28,6 @@ public class RemyCtrl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         col = GetComponent<CapsuleCollider>();
-        score_txt = GameObject.Find("Canvas").transform.GetChild(0).GetChild(0).GetComponent<Text>();
 
         targetPos = tr.position;  // 초기 위치를 설정
     }
@@ -39,9 +36,6 @@ public class RemyCtrl : MonoBehaviour
     {
         // 좌우 이동 처리
         MoveHorizontal();
-
-        if (!isDie)
-            IncreaseScore();
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && isGround && !isSlide)
             StartCoroutine(Jump());
@@ -96,17 +90,6 @@ public class RemyCtrl : MonoBehaviour
         col.height = initColHeight;
 
         isSlide = false;
-    }
-
-    void IncreaseScore()
-    {
-        deciamlScore += Time.deltaTime * 1; // 초당 1점씩 증가
-        if (deciamlScore >= 1f)
-        {
-            score += (int)deciamlScore; // 정수 부분만큼 점수(score)에 더함
-            deciamlScore -= Mathf.Floor(deciamlScore); // 정수로 더해진 값 만큼 deciamlScore에서 뺌
-        }
-        score_txt.text = $"{score}M";
     }
 
     void OnCollisionEnter(Collision col)
