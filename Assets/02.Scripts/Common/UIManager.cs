@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     Transform tr;
     Text score_txt;
     Text speedUp_txt;
+    Button exitBtn;
     int lastScore = -1;
 
     void Start()
@@ -17,8 +18,10 @@ public class UIManager : MonoBehaviour
         Transform canvas = GameObject.Find("Canvas").transform;
         score_txt = canvas.GetChild(0).GetChild(0).GetComponent<Text>();
         speedUp_txt = canvas.GetChild(1).GetComponent<Text>();
+        exitBtn = canvas.GetChild(2).GetComponent<Button>();
 
         speedUp_txt.gameObject.SetActive(false);
+        exitBtn.onClick.AddListener(() => ExitGame());
     }
 
     void Update()
@@ -44,5 +47,14 @@ public class UIManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.8f); // 1초 대기
         speedUp_txt.gameObject.SetActive(false);
+    }
+
+    void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

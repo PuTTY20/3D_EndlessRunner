@@ -41,9 +41,14 @@
 - 플랫폼이 움직이는 속도에 맞춰 점수도 같은 비율로 증가
 - 속도가 바뀔 때 UI를 띄워 속도가 증가했다는 것을 보여줌
 
+# 241015
+1. Player의 위치에 따른 MainCamera Position 설정
+2. Exit Button 생성
 
-
-
-
-점프하면 카메라 위로 올라가고 내려가면 카메라 아래로 내려감
 처음에는 장애물 조금나ㄱ오고 나중가면갈수록 빈번하게 (wait 
+체력 닳거나 땅에 떨어지면 playerDie
+Replay Button 만들기
+Exit Button 만들기
+score 기록 + 랭킹
+
+LOD 해야됨
