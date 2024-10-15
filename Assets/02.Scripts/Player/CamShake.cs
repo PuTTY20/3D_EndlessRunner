@@ -16,14 +16,15 @@ public class CamShake : MonoBehaviour
     {
         tr = transform;
         cam = Camera.main;
-
-        initPos = cam.transform.position;
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.gameObject.CompareTag(obstacleTag))
+        {
+            initPos = cam.transform.position;
             StartCoroutine(ShakeCamera());
+        }
     }
 
     IEnumerator ShakeCamera()
