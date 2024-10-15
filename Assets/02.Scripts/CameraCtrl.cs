@@ -4,23 +4,26 @@ using UnityEngine;
 
 public class CameraCtrl : MonoBehaviour
 {
+    RemyCtrl _remy;
     public Transform Target;
-    public float Height = 2.5f;
-    public float Distance = 6f;
-    float Damping = 5f;
     Transform Camtr;
-    Quaternion rot = Quaternion.identity;
 
     void Start()
     {
         Camtr = Camera.main.transform;
+        Target = GameObject.Find("Remy").transform;
     }
 
-    void LateUpdate()
+    void Update()
     {
-        float angle = Mathf.LerpAngle(Target.eulerAngles.y, Camtr.eulerAngles.y, Time.deltaTime * Damping);
-        rot = Quaternion.Euler(0f, angle, 0f);
-        Camtr.position = Target.position - (Vector3.forward * Distance) + (rot * Vector3.up * Height);
-        Camtr.LookAt(Target.transform);
+        if(!_remy.isGround)
+        {
+
+        }
+
+        else if(_remy.isSlide)
+        {
+            //up y pos of camera to 1.5
+        }
     }
 }
