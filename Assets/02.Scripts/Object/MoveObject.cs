@@ -18,7 +18,7 @@ public class MoveObject : MonoBehaviour
     {
         tr = transform;
         speed = initSpeed;
-        targetPos = new Vector3(tr.position.x, tr.position.y, -5f);
+        targetPos = new Vector3(tr.position.x, tr.position.y, -8f);
     }
 
     void Update()

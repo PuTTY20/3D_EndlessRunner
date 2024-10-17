@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour
         foreach (char c in text)
         {
             speedUp_txt.text += c;
-            yield return new WaitForSeconds(0.05f); // 타이핑 속도 조절
+            yield return new WaitForSeconds(0.1f); // 타이핑 속도 조절
         }
         yield return new WaitForSeconds(0.8f); // 1초 대기
         speedUp_txt.gameObject.SetActive(false);
