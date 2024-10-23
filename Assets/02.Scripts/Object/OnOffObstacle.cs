@@ -17,7 +17,7 @@ public class OnOffObstacle : MonoBehaviour
 
         if (Physics.Raycast(tr.position + Vector3.up * 0.3f, Vector3.down, out hit, 2f))
         {            
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
 
             if (hit.collider.CompareTag("PLATFORM") || hit.collider.CompareTag("Player"))
                 gameObject.SetActive(true);

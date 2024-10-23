@@ -45,11 +45,12 @@
 1. Player의 위치에 따른 MainCamera Position 설정
 2. Exit Button 생성
 
-처음에는 장애물 조금나ㄱ오고 나중가면갈수록 빈번하게 (wait 
 체력 닳거나 땅에 떨어지면 playerDie
 Replay Button 만들기
-Exit Button 만들기
 score 기록 + 랭킹
 
 LOD 해야됨
 아래로 raycast쏴서 없으면 점프 못하게(바닥에 떨어졌을 때 점프하지 못하도록 막기 위해서)
+
+# 241023
+1. Player 아래로 Raycast를 쏴 Platform에서 떨어졌을 때 점프하지 못하도록 제한.

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RemyCtrl : MonoBehaviour
 {
@@ -13,14 +12,16 @@ public class RemyCtrl : MonoBehaviour
     Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
     Vector3 targetPos;  // 목표 위치
 
+    readonly string platformTag = "PLATFORM";
+    readonly string obstacleTag = "OBSTACLE";
     float initColHeight = 3.8f;
     float moveValue = 0.8f;
     float jumpForce = 10f;
+    float damping = 5f;
     public bool isGround = true;
     public bool isSlide = false;
     public bool isDie = false;
     public bool isPlatform = false;
-    float damping = 5f;
 
     void Start()
     {
@@ -37,11 +38,20 @@ public class RemyCtrl : MonoBehaviour
         // 좌우 이동 처리
         MoveHorizontal();
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGround && !isSlide)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGround && !isSlide && isPlatform)
             StartCoroutine(Jump());
 
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isSlide && isGround)
             StartCoroutine(Slide());
+
+        RaycastHit hit;
+        if(Physics.Raycast(tr.position, Vector3.down, out hit, 0.5f))
+        {
+            Debug.Log(hit.collider.name);
+            if(!(hit.collider.CompareTag(platformTag) || hit.collider.CompareTag(obstacleTag)))
+                isPlatform = false;
+        }
+        Debug.DrawRay(tr.position, Vector3.down * 0.5f, Color.red);
     }
 
 
@@ -63,6 +73,7 @@ public class RemyCtrl : MonoBehaviour
 
     IEnumerator Jump()
     {
+
         ani.SetTrigger("Jump");
 
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);

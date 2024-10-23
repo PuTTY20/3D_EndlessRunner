@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             posZ = _move.zPos;
 
         if (!_remy.isDie)
-            IncreaseScore();
+            AddToScore();
     }
 
     IEnumerator ActivatePlatforms()
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void IncreaseScore()
+    void AddToScore()
     {
         if (score >= 200)
         {
