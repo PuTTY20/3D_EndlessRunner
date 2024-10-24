@@ -45,10 +45,10 @@ public class RemyCtrl : MonoBehaviour
             StartCoroutine(Slide());
 
         RaycastHit hit;
-        if(Physics.Raycast(tr.position, Vector3.down, out hit, 0.5f))
+        if (Physics.Raycast(tr.position + Vector3.up * 0.3f, Vector3.down, out hit, 0.5f))
         {
             Debug.Log(hit.collider.name);
-            if(!(hit.collider.CompareTag(platformTag) || hit.collider.CompareTag(obstacleTag)))
+            if (!(hit.collider.CompareTag(platformTag) || hit.collider.CompareTag(obstacleTag)))
                 isPlatform = false;
         }
         Debug.DrawRay(tr.position, Vector3.down * 0.5f, Color.red);
