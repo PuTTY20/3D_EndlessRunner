@@ -244,7 +244,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238931209}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 50
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -262,7 +262,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 2
+  m_CollisionDetection: 1
 --- !u!136 &238931213
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -809,6 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e31257f0acbf4f4da4932fbd697e410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  retryBtn: {fileID: 0}
 --- !u!1 &1402886464
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,8 +947,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ba39c8936944543957ab84deb587d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zPos: 0
   startPlatformInitPos: {x: 0, y: 0, z: 0}
+  startPlatform: {fileID: 0}
+  zPos: 0
 --- !u!1 &1575126599
 GameObject:
   m_ObjectHideFlags: 0

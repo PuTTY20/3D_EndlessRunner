@@ -12,12 +12,12 @@ public class RemyCtrl : MonoBehaviour
     Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
     Vector3 targetPos;  // 목표 위치
 
-    readonly string platformTag = "PLATFORM";
-    readonly string obstacleTag = "OBSTACLE";
     float initColHeight = 3.8f;
     float moveValue = 0.8f;
-    float jumpForce = 10f;
+    float jumpForce = 5.7f;
     float damping = 5f;
+    float timeToDie = 3f;
+    float timer = 0f;
     public bool isGround = true;
     public bool isSlide = false;
     public bool isDie = false;
@@ -33,8 +33,7 @@ public class RemyCtrl : MonoBehaviour
         ani = GetComponent<Animator>();
         col = GetComponent<CapsuleCollider>();
 
-        targetPos = tr.position;  // 초기 위치를 설정
-        
+        targetPos = tr.position;   
         initPosition = tr.position;
     }
 
@@ -49,25 +48,46 @@ public class RemyCtrl : MonoBehaviour
         // 슬라이드
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isSlide && isGround)
             StartCoroutine(Slide());
-
         // 플랫폼 또는 장애물 체크
         CheckPlatform();
     }
 
     void CheckPlatform()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(tr.position + Vector3.up * 0.3f, Vector3.down, out hit, 0.5f))
+        RaycastHit hit = GetPlatform(Vector3.down, 50f);
+        if (hit.collider == null)
         {
-            Debug.Log(hit.collider.name);
-            
-            if (!(hit.collider.CompareTag(platformTag) || hit.collider.CompareTag(obstacleTag)))
-                isPlatform = false;
-
-            else if(hit.collider.CompareTag("Player"))
-                isDie = true;
+            isPlatform = false;
+            isGround = false;
         }
-        Debug.DrawRay(tr.position, Vector3.down * 0.5f, Color.red);
+        else
+        {
+            isPlatform = true;
+            
+            if (hit.distance < 0.31f)
+                isGround = true;
+            else
+                isGround = false;
+        }
+
+        // 다른 메서드에 분리 가능 (죽음 감지 타이머)
+        if (!isPlatform)
+        {
+            timer += Time.deltaTime;
+            if (timer > timeToDie)
+            {
+                isDie = true;
+                timer = 0f;
+            }
+        }
+        else
+            timer = 0f;
+    }
+
+    RaycastHit GetPlatform(Vector3 dir, float distance)
+    {
+        Physics.Raycast(tr.position + Vector3.up * 0.3f, dir, out RaycastHit hit, distance);
+        return hit;
     }
 
     void MoveHorizontal()
@@ -79,8 +99,8 @@ public class RemyCtrl : MonoBehaviour
             targetPos.x += moveValue;
 
         // x값을 제한 범위 내로 고정
-        targetPos.x = Mathf.Clamp(targetPos.x, -0.8f, 0.8f);
-        targetPos.z = 0f;
+        float posX = Mathf.Clamp(targetPos.x, -0.8f, 0.8f);
+        targetPos = new Vector3(posX, tr.position.y, 0f);
 
         // 현재 위치에서 목표 위치로 부드럽게 이동
         tr.position = Vector3.Lerp(tr.position, targetPos, Time.deltaTime * damping);
@@ -88,19 +108,18 @@ public class RemyCtrl : MonoBehaviour
 
     IEnumerator Jump()
     {
-
         ani.SetTrigger("Jump");
 
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
+        //isGround = false;
+        yield return null;
+        //col.center = new Vector3(0f, 2.3f, 0f);
+        //col.height = initColHeight / 2f;
 
-        isGround = false;
-        col.center = new Vector3(0f, 2.3f, 0f);
-        col.height = initColHeight / 2f;
+        //yield return new WaitForSeconds(0.8f);
 
-        yield return new WaitForSeconds(0.8f);
-
-        col.center = initColCenter;
-        col.height = initColHeight;
+        //col.center = initColCenter;
+        //col.height = initColHeight;
     }
 
     IEnumerator Slide()
@@ -121,8 +140,8 @@ public class RemyCtrl : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         // 플랫폼과 충돌하면 isGround를 true로 설정
-        if (col.gameObject.CompareTag("PLATFORM"))
-            isGround = true;
+        //if (col.gameObject.CompareTag("PLATFORM"))
+        //    isGround = true;
     }
 
     // 이 코드로 인해 isGound가 깜빡여 정확한 점프가 불가능해 코드 삭제.
