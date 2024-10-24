@@ -5,48 +5,69 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    Transform tr;
+    CameraCtrl _cam;
+    RemyCtrl _remy;
+
     Text score_txt;
     Text speedUp_txt;
+    Button retryBtn;
     Button exitBtn;
+
+    readonly string remy = "Remy";
+    readonly string speedUp = "SPEED UP!";
     int lastScore = -1;
 
     void Start()
     {
-        tr = transform;
+        _cam = Camera.main.GetComponent<CameraCtrl>();
+        _remy = GameObject.Find(remy).GetComponent<RemyCtrl>();
 
         Transform canvas = GameObject.Find("Canvas").transform;
         score_txt = canvas.GetChild(0).GetChild(0).GetComponent<Text>();
         speedUp_txt = canvas.GetChild(1).GetComponent<Text>();
         exitBtn = canvas.GetChild(2).GetComponent<Button>();
+        retryBtn = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
+
+        retryBtn.onClick.AddListener(() => RetryGame());
+        exitBtn.onClick.AddListener(() => ExitGame());
 
         speedUp_txt.gameObject.SetActive(false);
-        exitBtn.onClick.AddListener(() => ExitGame());
     }
 
     void Update()
     {
-        score_txt.text = $"{GameManager.instance.score}M";
+        score_txt.text = $"{ScoreManager.instance.score}M";
+        CheckScore();
+    }
 
-        if ((GameManager.instance.score == 100 || GameManager.instance.score == 200) && GameManager.instance.score != lastScore)
+    private void CheckScore()
+    {
+        if ((ScoreManager.instance.score == 100 || ScoreManager.instance.score == 200) && ScoreManager.instance.score != lastScore)
         {
-            lastScore = GameManager.instance.score; //프레임동안 값이 같아져버림 그래서 1번밖에 안함
+            lastScore = ScoreManager.instance.score; //프레임동안 값이 같아져 1번만 함
             speedUp_txt.gameObject.SetActive(true);
-            StartCoroutine(SpeedUpTextEffect("SPEED UP!"));
+            StartCoroutine(ShowTextEffect(speedUp));
         }
     }
 
-    IEnumerator SpeedUpTextEffect(string text)
+    IEnumerator ShowTextEffect(string text)
     {
         speedUp_txt.text = string.Empty;
 
         foreach (char c in text)
         {
             speedUp_txt.text += c;
-            yield return new WaitForSeconds(0.1f); // 타이핑 속도 조절
+            yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(0.8f); // 1초 대기
+        yield return new WaitForSeconds(0.8f);
         speedUp_txt.gameObject.SetActive(false);
+    }
+
+    void RetryGame()
+    {
+        _cam.ResetCamera();
+        _remy.ResetRemy();
+        ScoreManager.instance.ResetGame();
     }
 
     void ExitGame()

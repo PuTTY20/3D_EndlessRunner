@@ -6,7 +6,6 @@ public class CameraCtrl : MonoBehaviour
 {
     RemyCtrl _remy;
     Transform Camtr;
-    CamShake camShake; // CamShake 스크립트 참조
 
     Vector3 initCamPos;
     float damping = 5f;
@@ -15,7 +14,6 @@ public class CameraCtrl : MonoBehaviour
     {
         Camtr = Camera.main.transform;
         _remy = GameObject.Find("Remy").GetComponent<RemyCtrl>();
-        camShake = _remy.GetComponent<CamShake>(); // Remy 오브젝트에서 CamShake 스크립트 가져오기
         initCamPos = Camtr.position;
     }
 
@@ -33,5 +31,10 @@ public class CameraCtrl : MonoBehaviour
         }
         else
             Camtr.position = Vector3.Lerp(Camtr.position, initCamPos, Time.deltaTime * 10f);
+    }
+
+    public void ResetCamera()
+    {
+        Camtr.position = initCamPos;
     }
 }

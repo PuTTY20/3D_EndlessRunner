@@ -21,7 +21,10 @@ public class RemyCtrl : MonoBehaviour
     public bool isGround = true;
     public bool isSlide = false;
     public bool isDie = false;
-    public bool isPlatform = false;
+    public bool isPlatform = true;
+
+    [Header("Reset 관련")]
+    Vector3 initPosition;
 
     void Start()
     {
@@ -31,6 +34,8 @@ public class RemyCtrl : MonoBehaviour
         col = GetComponent<CapsuleCollider>();
 
         targetPos = tr.position;  // 초기 위치를 설정
+        
+        initPosition = tr.position;
     }
 
     void Update()
@@ -38,14 +43,21 @@ public class RemyCtrl : MonoBehaviour
         // 좌우 이동 처리
         MoveHorizontal();
 
+        // 점프
         if (Input.GetKeyDown(KeyCode.UpArrow) && isGround && !isSlide && isPlatform)
             StartCoroutine(Jump());
-
+        // 슬라이드
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isSlide && isGround)
             StartCoroutine(Slide());
 
+        // 플랫폼 또는 장애물 체크
+        CheckPlatform();
+    }
+
+    void CheckPlatform()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(tr.position + Vector3.up * 0.3f, Vector3.down, out hit, 0.5f))
+        if (Physics.Raycast(tr.position + Vector3.up * 0.3f, Vector3.down, out hit, 0.2f))
         {
             Debug.Log(hit.collider.name);
             if (!(hit.collider.CompareTag(platformTag) || hit.collider.CompareTag(obstacleTag)))
@@ -53,7 +65,6 @@ public class RemyCtrl : MonoBehaviour
         }
         Debug.DrawRay(tr.position, Vector3.down * 0.5f, Color.red);
     }
-
 
     void MoveHorizontal()
     {
@@ -120,4 +131,14 @@ public class RemyCtrl : MonoBehaviour
     //         isGround = false;
     //     }
     // }
+
+    public void ResetRemy()
+    {
+        tr.position = initPosition;
+        rb.velocity = Vector3.zero;
+        isGround = true;
+        isSlide = false;
+        isDie = false;
+        isPlatform = true;
+    }
 }

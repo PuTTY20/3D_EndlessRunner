@@ -5,12 +5,12 @@ using UnityEngine;
 public class MoveObject : MonoBehaviour
 {
     Transform tr;
-    string startPlatform = "START";
-    public float zPos = 0f;
     Vector3 targetPos;
+    public float zPos = 0f;
+    readonly string startPlatform = "START";
     float speed = 0f;
     float initSpeed = 7f;
-    float midleSpeed = 10.5f;      //1.5배 증가
+    float midleSpeed = 10.5f;   //1.5배 증가
     float maxSpeed = 15.75f;    //2.25배 증가
 
 
@@ -38,12 +38,12 @@ public class MoveObject : MonoBehaviour
 
     public void MovePlatform()
     {
-        if(GameManager.instance.score > 200)
+        if(ScoreManager.instance.score > 200)
         {
             speed = maxSpeed;
             Debug.Log(speed);
         }
-        else if(GameManager.instance.score > 100)
+        else if(ScoreManager.instance.score > 100)
         {
             speed = midleSpeed;
             Debug.Log(speed);
