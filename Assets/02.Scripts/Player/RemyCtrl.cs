@@ -57,11 +57,15 @@ public class RemyCtrl : MonoBehaviour
     void CheckPlatform()
     {
         RaycastHit hit;
-        if (Physics.Raycast(tr.position + Vector3.up * 0.3f, Vector3.down, out hit, 0.2f))
+        if (Physics.Raycast(tr.position + Vector3.up * 0.3f, Vector3.down, out hit, 0.5f))
         {
             Debug.Log(hit.collider.name);
+            
             if (!(hit.collider.CompareTag(platformTag) || hit.collider.CompareTag(obstacleTag)))
                 isPlatform = false;
+
+            else if(hit.collider.CompareTag("Player"))
+                isDie = true;
         }
         Debug.DrawRay(tr.position, Vector3.down * 0.5f, Color.red);
     }

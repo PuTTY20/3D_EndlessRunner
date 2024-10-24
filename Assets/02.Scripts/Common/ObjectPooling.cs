@@ -133,7 +133,7 @@ public class ObjectPooling : MonoBehaviour
                 obstacleOffPlatformList.Add(obstacle);
         }
 
-        if(obstacleOffPlatformList.Count > 0)
+        if (obstacleOffPlatformList.Count > 0)
         {
             int randomIdx = Random.Range(0, obstacleOffPlatformList.Count);
             return obstacleOffPlatformList[randomIdx];
@@ -143,4 +143,15 @@ public class ObjectPooling : MonoBehaviour
     }
 
     public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);
+
+    public void OffAllPlatform()
+    {
+        foreach (GameObject platform in PlatformList)
+            if (platform.activeSelf)
+                platform.SetActive(false);
+
+        foreach (GameObject obstacle in obstaclePlatformList)
+            if (obstacle.activeSelf)
+                obstacle.SetActive(false);
+    }
 }

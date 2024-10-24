@@ -5,23 +5,16 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    CameraCtrl _cam;
-    RemyCtrl _remy;
-
     Text score_txt;
     Text speedUp_txt;
-    Button retryBtn;
+    [SerializeField] Button retryBtn;
     Button exitBtn;
 
-    readonly string remy = "Remy";
     readonly string speedUp = "SPEED UP!";
     int lastScore = -1;
 
     void Start()
     {
-        _cam = Camera.main.GetComponent<CameraCtrl>();
-        _remy = GameObject.Find(remy).GetComponent<RemyCtrl>();
-
         Transform canvas = GameObject.Find("Canvas").transform;
         score_txt = canvas.GetChild(0).GetChild(0).GetComponent<Text>();
         speedUp_txt = canvas.GetChild(1).GetComponent<Text>();
@@ -63,12 +56,7 @@ public class UIManager : MonoBehaviour
         speedUp_txt.gameObject.SetActive(false);
     }
 
-    void RetryGame()
-    {
-        _cam.ResetCamera();
-        _remy.ResetRemy();
-        ScoreManager.instance.ResetGame();
-    }
+    void RetryGame() => GameManager.instance.Retry();
 
     void ExitGame()
     {
