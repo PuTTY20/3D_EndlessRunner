@@ -6,12 +6,25 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public static UIManager UI;
+    public static ScoreManager Score;
+    public static PlatformManager Platform;
+    public static ObjectPooling Pooling;
+
     CameraCtrl _cam;
     RemyCtrl _remy;
     MoveObject _moveObject;
 
     readonly string remy = "Remy";
     public readonly string startPlatform = "Start";
+
+    void Awake()
+    {
+        UI = gameObject.AddComponent<UIManager>();
+        Score = gameObject.AddComponent<ScoreManager>();
+        Platform = gameObject.AddComponent<PlatformManager>();
+        Pooling = gameObject.AddComponent<ObjectPooling>();
+    }
 
     void Start()
     {
@@ -24,7 +37,8 @@ public class GameManager : MonoBehaviour
     {
         if(_remy.isDie)
         {
-            // 게임오버 처리(score 저장, name 띄움, 랭킹 등)
+            Score.SaveScore();
+            UI.ShowRanking();
         }
     }
 
@@ -33,7 +47,7 @@ public class GameManager : MonoBehaviour
         _cam.ResetCamera();
         _remy.ResetRemy();
         _moveObject.ResetPlatform();
-        ScoreManager.instance.ResetGame();
-        ObjectPooling.poolingManager.OffAllPlatform();
+        Score.ResetGame();
+        ObjectPooling.objpooling.OffAllPlatform();
     }
 }

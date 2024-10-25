@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance;
-
     RemyCtrl _remy;
+    List<int> highScore;
 
     public int score = 0;
     float deciamlScore = 0f;
@@ -15,17 +14,9 @@ public class ScoreManager : MonoBehaviour
     float midAddScore = 1.5f;
     float maxAddScore = 2.25f;
 
-
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
-
     void Start()
     {
+        highScore = new List<int>();
         addScore = initAddScore;
 
         _remy = GameObject.Find("Remy").GetComponent<RemyCtrl>();
@@ -33,22 +24,16 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        if (!_remy.isDie)
+        if (_remy.isPlatform && !_remy.isDie)
             AddToScore();
     }
 
     void AddToScore()
     {
         if (score >= 200)
-        {
             addScore = maxAddScore;
-            Debug.Log(addScore);
-        }
         else if (score >= 100)
-        {
             addScore = midAddScore;
-            Debug.Log(addScore);
-        }
 
         deciamlScore += Time.deltaTime * addScore; // 초당 1씩 증가
 
@@ -64,5 +49,16 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         deciamlScore = 0f;
         addScore = initAddScore;
+    }
+
+    public void SaveScore()
+    {
+        highScore.Add(score);
+        highScore.Sort((a, b) => b.CompareTo(a)); // 내림차순 정렬
+    }
+
+    public List<int> GetHighScore()
+    {
+        return highScore;
     }
 }

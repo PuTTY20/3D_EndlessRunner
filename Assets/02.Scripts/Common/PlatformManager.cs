@@ -4,21 +4,11 @@ using UnityEngine;
 
 public class PlatformManager : MonoBehaviour
 {
-    public static PlatformManager instance;
-
     MoveObject _move;
     GameObject selectedPlatform = null;
     GameObject selectedObstacle = null;
 
     float posZ = 0f;
-
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-    }
 
     void Start()
     {
@@ -45,7 +35,7 @@ public class PlatformManager : MonoBehaviour
             // selectedPlatform.SetActive(true);
             #endregion
 
-            selectedPlatform = ObjectPooling.poolingManager.GetPlatform();
+            selectedPlatform = ObjectPooling.objpooling.GetPlatform();
 
             if (selectedPlatform != null)
             {
@@ -62,7 +52,7 @@ public class PlatformManager : MonoBehaviour
     {
         while (true)
         {
-            selectedObstacle = ObjectPooling.poolingManager.GetObstacle();
+            selectedObstacle = ObjectPooling.objpooling.GetObstacle();
             if (selectedObstacle != null)
             {
                 selectedObstacle.SetActive(true);

@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
-{
-    Text score_txt;
+{   
+    Transform canvasRank;
+    [SerializeField] Text score_txt;
     Text speedUp_txt;
-    [SerializeField] Button retryBtn;
+    Button retryBtn;
     Button exitBtn;
+    Text rankTxt;
 
     readonly string speedUp = "SPEED UP!";
     int lastScore = -1;
@@ -21,23 +23,29 @@ public class UIManager : MonoBehaviour
         exitBtn = canvas.GetChild(2).GetComponent<Button>();
         retryBtn = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
 
+        canvasRank = GameObject.Find("Canvas_Rank").transform;
+        rankTxt = canvasRank.GetChild(0).GetChild(0).GetComponent<Text>();
+
         retryBtn.onClick.AddListener(() => RetryGame());
         exitBtn.onClick.AddListener(() => ExitGame());
 
         speedUp_txt.gameObject.SetActive(false);
+
+        canvas.gameObject.SetActive(true);
+        canvasRank.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        score_txt.text = $"{ScoreManager.instance.score}M";
+        score_txt.text = $"{GameManager.Score.score}M";
         CheckScore();
     }
 
     private void CheckScore()
     {
-        if ((ScoreManager.instance.score == 100 || ScoreManager.instance.score == 200) && ScoreManager.instance.score != lastScore)
+        if ((GameManager.Score.score == 100 || GameManager.Score.score == 200) && GameManager.Score.score != lastScore)
         {
-            lastScore = ScoreManager.instance.score; //프레임동안 값이 같아져 1번만 함
+            lastScore = GameManager.Score.score; //프레임동안 값이 같아져 1번만 함
             speedUp_txt.gameObject.SetActive(true);
             StartCoroutine(ShowTextEffect(speedUp));
         }
@@ -54,6 +62,12 @@ public class UIManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.8f);
         speedUp_txt.gameObject.SetActive(false);
+    }
+
+    public void ShowRanking()
+    {
+        canvasRank.gameObject.SetActive(true);
+        rankTxt.text = GameManager.Score.score.ToString();
     }
 
     void RetryGame() => GameManager.instance.Retry();

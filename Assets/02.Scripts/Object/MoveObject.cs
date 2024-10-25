@@ -44,12 +44,12 @@ public class MoveObject : MonoBehaviour
 
     public void MovePlatform()
     {
-        if (ScoreManager.instance.score > 200)
+        if (GameManager.Score.score > 200)
         {
             speed = maxSpeed;
             Debug.Log(speed);
         }
-        else if (ScoreManager.instance.score > 100)
+        else if (GameManager.Score.score > 100)
         {
             speed = midleSpeed;
             Debug.Log(speed);
@@ -59,7 +59,7 @@ public class MoveObject : MonoBehaviour
         zPos = tr.position.z;
 
         if (tr.position == targetPos)
-            ObjectPooling.poolingManager.RetunPlatformPool(gameObject);
+            ObjectPooling.objpooling.RetunPlatformPool(gameObject);
     }
 
     public void ResetPlatform()

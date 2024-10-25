@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectPooling : MonoBehaviour
 {
-    public static ObjectPooling poolingManager;
+    public static ObjectPooling objpooling;
 
     List<GameObject> PlatformList = new List<GameObject>();
     List<GameObject> offPlatformList = new List<GameObject>();
@@ -34,9 +34,9 @@ public class ObjectPooling : MonoBehaviour
 
     void Awake()
     {
-        if (poolingManager == null)
-            poolingManager = this;
-        else if (poolingManager != this)
+        if (objpooling == null)
+            objpooling = this;
+        else if (objpooling != this)
             Destroy(gameObject);
 
         _default = Resources.Load<GameObject>("ObjectPlatform/DefaultPlatform");
