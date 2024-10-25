@@ -13,7 +13,7 @@ public class CameraCtrl : MonoBehaviour
     void Start()
     {
         Camtr = Camera.main.transform;
-        _remy = GameObject.Find("Remy").GetComponent<RemyCtrl>();
+        _remy = FindObjectOfType<RemyCtrl>();
         initCamPos = Camtr.position;
     }
 
@@ -31,10 +31,5 @@ public class CameraCtrl : MonoBehaviour
         }
         else
             Camtr.position = Vector3.Lerp(Camtr.position, initCamPos, Time.deltaTime * 10f);
-    }
-
-    public void ResetCamera()
-    {
-        Camtr.position = initCamPos;
     }
 }

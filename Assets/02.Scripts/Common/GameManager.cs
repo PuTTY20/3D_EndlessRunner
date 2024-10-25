@@ -11,15 +11,15 @@ public class GameManager : MonoBehaviour
     public static PlatformManager Platform;
     public static ObjectPooling Pooling;
 
-    CameraCtrl _cam;
     RemyCtrl _remy;
-    MoveObject _moveObject;
-
-    readonly string remy = "Remy";
-    public readonly string startPlatform = "Start";
 
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
         UI = gameObject.AddComponent<UIManager>();
         Score = gameObject.AddComponent<ScoreManager>();
         Platform = gameObject.AddComponent<PlatformManager>();
@@ -28,26 +28,22 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _cam = Camera.main.GetComponent<CameraCtrl>();
-        _remy = GameObject.Find(remy).GetComponent<RemyCtrl>();
-        _moveObject = GameObject.Find(startPlatform).GetComponent<MoveObject>();
+        _remy = FindObjectOfType<RemyCtrl>();
     }
 
     void Update()
     {
-        if(_remy.isDie)
+        if (_remy.isDie)
         {
             Score.SaveScore();
             UI.ShowRanking();
         }
     }
 
-    public void Retry()
+    public void Reset()
     {
-        _cam.ResetCamera();
         _remy.ResetRemy();
-        _moveObject.ResetPlatform();
-        Score.ResetGame();
-        ObjectPooling.objpooling.OffAllPlatform();
+        Score.ResetScore();
+        Pooling.OffAllPlatform();
     }
 }

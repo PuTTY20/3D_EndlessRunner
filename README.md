@@ -56,10 +56,14 @@ LOD 해야됨
 1. Player 아래로 Raycast를 쏴 Platform에서 떨어졌을 때 점프하지 못하도록 제한.
 
 # 241024
-재시도 누르면
+1. Reset 기능
 objectPooling에서 platform, obstacle 모두 하이라키에 있는거 다 끔
 score 초기화
 speed 초기화
 startPlatform initPos로 초기화
 "player 위치 초기화"
-"카메라 위치 초기화"
+
+# 241025
+1. 코드 수정
+2. StartPlatform 부모 Object를 만들어 StartPlatform을 관리하도록 수정
+3. 

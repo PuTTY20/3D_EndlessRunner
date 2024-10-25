@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveObject : MonoBehaviour
 {
     Transform tr;
-    Vector3 targetPos;
+    Vector3 offPos;
     [SerializeField] Vector3 startPlatformInitPos;
     [SerializeField] GameObject startPlatform;
     public readonly string startName = "Start";
@@ -19,7 +19,7 @@ public class MoveObject : MonoBehaviour
     {
         tr = transform;
         speed = initSpeed;
-        targetPos = new Vector3(tr.position.x, tr.position.y, -8f);
+        offPos = new Vector3(tr.position.x, tr.position.y, -8f);
         if(startPlatform != null)
         startPlatform = GameObject.Find(startName).gameObject;
 
@@ -31,10 +31,7 @@ public class MoveObject : MonoBehaviour
     {
         if (startPlatform)
         {
-            tr.position = Vector3.MoveTowards(tr.position, targetPos, 7f * Time.deltaTime);
-
-            if (tr.position == targetPos)
-                this.gameObject.SetActive(false);
+            tr.position = Vector3.MoveTowards(tr.position, offPos, 7f * Time.deltaTime);
         }
 
         //PlatformMove
@@ -54,12 +51,12 @@ public class MoveObject : MonoBehaviour
             speed = midleSpeed;
             Debug.Log(speed);
         }
-        tr.position = Vector3.MoveTowards(tr.position, targetPos, speed * Time.deltaTime);
+        tr.position = Vector3.MoveTowards(tr.position, offPos, speed * Time.deltaTime);
 
         zPos = tr.position.z;
 
-        if (tr.position == targetPos)
-            ObjectPooling.objpooling.RetunPlatformPool(gameObject);
+        if (tr.position == offPos)
+            GameManager.Pooling.RetunPlatformPool(gameObject);
     }
 
     public void ResetPlatform()

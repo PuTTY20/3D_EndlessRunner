@@ -35,7 +35,7 @@ public class PlatformManager : MonoBehaviour
             // selectedPlatform.SetActive(true);
             #endregion
 
-            selectedPlatform = ObjectPooling.objpooling.GetPlatform();
+            selectedPlatform = GameManager.Pooling.GetPlatform();
 
             if (selectedPlatform != null)
             {
@@ -52,7 +52,7 @@ public class PlatformManager : MonoBehaviour
     {
         while (true)
         {
-            selectedObstacle = ObjectPooling.objpooling.GetObstacle();
+            selectedObstacle = GameManager.Pooling.GetObstacle();
             if (selectedObstacle != null)
             {
                 selectedObstacle.SetActive(true);

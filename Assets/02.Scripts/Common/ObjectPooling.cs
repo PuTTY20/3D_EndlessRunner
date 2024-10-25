@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ObjectPooling : MonoBehaviour
 {
-    public static ObjectPooling objpooling;
-
     List<GameObject> PlatformList = new List<GameObject>();
     List<GameObject> offPlatformList = new List<GameObject>();
     List<GameObject> obstaclePlatformList = new List<GameObject>();
@@ -34,11 +32,6 @@ public class ObjectPooling : MonoBehaviour
 
     void Awake()
     {
-        if (objpooling == null)
-            objpooling = this;
-        else if (objpooling != this)
-            Destroy(gameObject);
-
         _default = Resources.Load<GameObject>("ObjectPlatform/DefaultPlatform");
         bridge = Resources.Load<GameObject>("ObjectPlatform/BridgePlatform");
         oneLeft = Resources.Load<GameObject>("ObjectPlatform/OneLeftPlatform");

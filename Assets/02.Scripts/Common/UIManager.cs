@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {   
     Transform canvasRank;
-    [SerializeField] Text score_txt;
-    Text speedUp_txt;
-    Button retryBtn;
+    GameObject rankPanel;
+    Button replay;
     Button exitBtn;
+    Text score_txt;
+    Text speedUp_txt;
     Text rankTxt;
 
     readonly string speedUp = "SPEED UP!";
@@ -21,18 +22,16 @@ public class UIManager : MonoBehaviour
         score_txt = canvas.GetChild(0).GetChild(0).GetComponent<Text>();
         speedUp_txt = canvas.GetChild(1).GetComponent<Text>();
         exitBtn = canvas.GetChild(2).GetComponent<Button>();
-        retryBtn = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
+        replay = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
 
         canvasRank = GameObject.Find("Canvas_Rank").transform;
         rankTxt = canvasRank.GetChild(0).GetChild(0).GetComponent<Text>();
 
-        retryBtn.onClick.AddListener(() => RetryGame());
+        replay.onClick.AddListener(() => ReplayGame());
         exitBtn.onClick.AddListener(() => ExitGame());
 
-        speedUp_txt.gameObject.SetActive(false);
-
-        canvas.gameObject.SetActive(true);
-        canvasRank.gameObject.SetActive(false);
+        rankPanel = canvasRank.GetChild(0).gameObject;
+        rankPanel.SetActive(false);
     }
 
     void Update()
@@ -46,7 +45,7 @@ public class UIManager : MonoBehaviour
         if ((GameManager.Score.score == 100 || GameManager.Score.score == 200) && GameManager.Score.score != lastScore)
         {
             lastScore = GameManager.Score.score; //프레임동안 값이 같아져 1번만 함
-            speedUp_txt.gameObject.SetActive(true);
+            speedUp_txt.enabled = true;
             StartCoroutine(ShowTextEffect(speedUp));
         }
     }
@@ -61,16 +60,16 @@ public class UIManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(0.8f);
-        speedUp_txt.gameObject.SetActive(false);
+        speedUp_txt.enabled = false;
     }
 
     public void ShowRanking()
     {
-        canvasRank.gameObject.SetActive(true);
+        rankPanel.SetActive(true);
         rankTxt.text = GameManager.Score.score.ToString();
     }
 
-    void RetryGame() => GameManager.instance.Retry();
+    void ReplayGame() => GameManager.instance.Reset();
 
     void ExitGame()
     {

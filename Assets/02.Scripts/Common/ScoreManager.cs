@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
         highScore = new List<int>();
         addScore = initAddScore;
 
-        _remy = GameObject.Find("Remy").GetComponent<RemyCtrl>();
+        _remy = FindObjectOfType<RemyCtrl>();
     }
 
     void Update()
@@ -44,7 +44,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void ResetGame()
+    public void ResetScore()
     {
         score = 0;
         deciamlScore = 0f;
