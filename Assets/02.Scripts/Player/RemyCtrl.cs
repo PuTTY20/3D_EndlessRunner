@@ -10,14 +10,14 @@ public class RemyCtrl : MonoBehaviour
     CapsuleCollider col;
 
     Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
-    Vector3 targetPos;  // 목표 위치
+    Vector3 curPos;
 
     float initColHeight = 3.8f;
-    float moveValue = 0.8f;
-    float jumpForce = 5.7f;
+    float moveSize = 0.8f;
+    float jumpForce = 5.0f;
     float damping = 5f;
-    float timeToDie = 3f;
     float timer = 0f;
+    float coolDown = 3f;
     public bool isGround = true;
     public bool isSlide = false;
     public bool isDie = false;
@@ -32,8 +32,6 @@ public class RemyCtrl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         col = GetComponent<CapsuleCollider>();
-
-        targetPos = tr.position;   
         initPosition = tr.position;
     }
 
@@ -48,78 +46,41 @@ public class RemyCtrl : MonoBehaviour
         // 슬라이드
         if (Input.GetKeyDown(KeyCode.DownArrow) && !isSlide && isGround)
             StartCoroutine(Slide());
+
         // 플랫폼 또는 장애물 체크
         CheckPlatform();
-    }
 
-    void CheckPlatform()
-    {
-        RaycastHit hit = GetPlatform(Vector3.down, 50f);
-        if (hit.collider == null)
-        {
-            isPlatform = false;
-            isGround = false;
-        }
-        else
-        {
-            isPlatform = true;
-            
-            if (hit.distance < 0.31f)
-                isGround = true;
-            else
-                isGround = false;
-        }
-
-        // 다른 메서드에 분리 가능 (죽음 감지 타이머)
-        if (!isPlatform)
-        {
-            timer += Time.deltaTime;
-            if (timer > timeToDie)
-            {
-                isDie = true;
-                timer = 0f;
-            }
-        }
-        else
-            timer = 0f;
-    }
-
-    RaycastHit GetPlatform(Vector3 dir, float distance)
-    {
-        Physics.Raycast(tr.position + Vector3.up * 0.3f, dir, out RaycastHit hit, distance);
-        return hit;
+        // PlayerDie 처리
+        DieCheck();
     }
 
     void MoveHorizontal()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && targetPos.x > -0.8f)
-            targetPos.x -= moveValue;
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && curPos.x >= -0.8f)
+            curPos.x -= moveSize;
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && targetPos.x < 0.8f)
-            targetPos.x += moveValue;
+        if (Input.GetKeyDown(KeyCode.RightArrow) && curPos.x <= 0.8f)
+            curPos.x += moveSize;
 
-        // x값을 제한 범위 내로 고정
-        float posX = Mathf.Clamp(targetPos.x, -0.8f, 0.8f);
-        targetPos = new Vector3(posX, tr.position.y, 0f);
+        float posX = Mathf.Clamp(curPos.x, -0.8f, 0.8f);
+        curPos = new Vector3(posX, tr.position.y, 0f);
 
-        // 현재 위치에서 목표 위치로 부드럽게 이동
-        tr.position = Vector3.Lerp(tr.position, targetPos, Time.deltaTime * damping);
+        tr.position = Vector3.Lerp(tr.position, curPos, Time.deltaTime * damping);
     }
 
     IEnumerator Jump()
     {
         ani.SetTrigger("Jump");
-
         rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
-        //isGround = false;
-        yield return null;
-        //col.center = new Vector3(0f, 2.3f, 0f);
-        //col.height = initColHeight / 2f;
 
-        //yield return new WaitForSeconds(0.8f);
+        //yield return null;
+        col.center = new Vector3(0f, 2.3f, 0f);
+        col.height = initColHeight / 2f;
 
-        //col.center = initColCenter;
-        //col.height = initColHeight;
+        yield return new WaitForSeconds(0.8f);
+
+        col.center = initColCenter;
+        col.height = initColHeight;
     }
 
     IEnumerator Slide()
@@ -137,13 +98,6 @@ public class RemyCtrl : MonoBehaviour
         isSlide = false;
     }
 
-    void OnCollisionEnter(Collision col)
-    {
-        // 플랫폼과 충돌하면 isGround를 true로 설정
-        //if (col.gameObject.CompareTag("PLATFORM"))
-        //    isGround = true;
-    }
-
     // 이 코드로 인해 isGound가 깜빡여 정확한 점프가 불가능해 코드 삭제.
     // Jump()에서 isGound false 처리
     // void OnCollisionExit(Collision col)
@@ -154,6 +108,46 @@ public class RemyCtrl : MonoBehaviour
     //         isGround = false;
     //     }
     // }
+
+    RaycastHit GetPlatform(Vector3 dir, float distance)
+    {
+        Physics.Raycast(tr.position + Vector3.up * 0.3f, dir, out RaycastHit hit, distance);
+        return hit;
+    }
+
+    void CheckPlatform()
+    {
+        RaycastHit hit = GetPlatform(Vector3.down, 50f);
+        if (hit.collider == null)
+        {
+            isPlatform = false;
+            isGround = false;
+        }
+        else
+        {
+            isPlatform = true;
+
+            if (hit.distance < 0.31f)
+                isGround = true;
+            else
+                isGround = false;
+        }
+    }
+
+    void DieCheck()
+    {
+        if (!isPlatform)
+        {
+            timer += Time.deltaTime;
+            if (timer > coolDown)
+            {
+                isDie = true;
+                timer = 0f;
+            }
+        }
+        else
+            timer = 0f;
+    }
 
     public void ResetRemy()
     {

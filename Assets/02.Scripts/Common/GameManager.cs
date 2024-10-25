@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour
         _moveObject = GameObject.Find(startPlatform).GetComponent<MoveObject>();
     }
 
+    void Update()
+    {
+        if(_remy.isDie)
+        {
+            // 게임오버 처리(score 저장, name 띄움, 랭킹 등)
+        }
+    }
+
     public void Retry()
     {
         _cam.ResetCamera();
