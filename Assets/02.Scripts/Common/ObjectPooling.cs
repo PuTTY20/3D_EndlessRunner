@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ObjectPooling : MonoBehaviour
 {
-    List<GameObject> PlatformList = new List<GameObject>();
+    public List<GameObject> PlatformList = new List<GameObject>();
     List<GameObject> offPlatformList = new List<GameObject>();
-    List<GameObject> obstaclePlatformList = new List<GameObject>();
+    public List<GameObject> obstaclePlatformList = new List<GameObject>();
     List<GameObject> obstacleOffPlatformList = new List<GameObject>();
 
     [Header("Platforms")]

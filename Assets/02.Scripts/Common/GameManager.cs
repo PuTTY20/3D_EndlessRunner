@@ -51,8 +51,7 @@ public class GameManager : MonoBehaviour
         isDie = false;
         UI.ShowRanking(false);
         Score.ResetScore();
-        Platform.posZ = 0f;
-        Pooling.OffAllPlatform();
+        Platform.OffAllPlatform();
         _remy.ResetRemy();
         _startplatform.ResetStartPlatform();
 
