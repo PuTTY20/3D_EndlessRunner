@@ -24,6 +24,7 @@ public class PlatformManager : MonoBehaviour
 
     public IEnumerator ActivatePlatforms()
     {
+        posZ = 0f;  //Reset 했을 때 바로 눈 앞에 플랫폼 나타나게 하려면 필수...
         while (true)
         {
             selectedPlatform = GameManager.Pooling.GetPlatform();
@@ -41,6 +42,7 @@ public class PlatformManager : MonoBehaviour
 
     public IEnumerator ActiveObstacle()
     {
+        posZ = 0f;
         while (true)
         {
             selectedObstacle = GameManager.Pooling.GetObstacle();

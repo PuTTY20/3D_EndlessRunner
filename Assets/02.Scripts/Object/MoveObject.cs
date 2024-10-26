@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MoveObject : MonoBehaviour
 {
-    Transform tr;
     Vector3 offPos;
     public float zPos = 0f;
     float speed = 0f;
@@ -14,15 +13,8 @@ public class MoveObject : MonoBehaviour
 
     void Start()
     {
-        tr = transform;
         speed = initSpeed;
-        offPos = new Vector3(tr.position.x, tr.position.y, -8f);
-    }
-
-    void OnDisable()
-    {
-        tr.position = new Vector3(tr.position.x, tr.position.y, 0);
-        zPos = tr.position.z;
+        offPos = new Vector3(transform.position.x, transform.position.y, -8f);
     }
 
     void Update()
@@ -43,11 +35,11 @@ public class MoveObject : MonoBehaviour
             speed = midleSpeed;
             Debug.Log(speed);
         }
-        tr.position = Vector3.MoveTowards(tr.position, offPos, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, offPos, speed * Time.deltaTime);
 
-        zPos = tr.position.z;
+        zPos = transform.position.z;
 
-        if (tr.position == offPos)
+        if (transform.position == offPos)
             GameManager.Pooling.RetunPlatformPool(gameObject);
     }
 }

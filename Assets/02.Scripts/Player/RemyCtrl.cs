@@ -18,7 +18,7 @@ public class RemyCtrl : MonoBehaviour
     float jumpForce = 5.0f;
     float damping = 5f;
     float timer = 0f;
-    float coolDown = 3f;
+    float coolDown = 2f;
     public bool isGround = true;
     public bool isSlide = false;
     public bool isPlatform = true;
