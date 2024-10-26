@@ -91,12 +91,6 @@ public class ObjectPooling : MonoBehaviour
 
     public GameObject GetPlatform()
     {
-        #region 전체 리스트에서 랜덤한 플랫폼을 선택하는 코드로, 이미 활성화된 플랫폼을 반환해 플랫폼이 자리를 이동해버리는 문제 발생으로 코드 삭제
-        // foreach (GameObject platform in PlatformList)
-        //     if (!platform.activeSelf && !platform.activeInHierarchy)
-        //         return PlatformList[Random.Range(0, PlatformList.Count)];
-        #endregion
-
         // inactivePlatforms 리스트 초기화
         offPlatformList.Clear();
 

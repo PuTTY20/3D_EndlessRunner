@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         if (isDie)
         {
             UI.ShowRanking(true);
+            Platform.OffAllPlatform();
         }
     }
 
@@ -54,6 +55,8 @@ public class GameManager : MonoBehaviour
         Platform.OffAllPlatform();
         _remy.ResetRemy();
         _startplatform.ResetStartPlatform();
+        Platform.ActivatePlatforms();
+        Platform.ActiveObstacle();
 
         isReset = false;
     }

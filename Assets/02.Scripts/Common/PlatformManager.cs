@@ -24,7 +24,7 @@ public class PlatformManager : MonoBehaviour
 
     public IEnumerator ActivatePlatforms()
     {
-        while (!GameManager.instance.isDie)
+        while (true)
         {
             selectedPlatform = GameManager.Pooling.GetPlatform();
 
@@ -41,7 +41,7 @@ public class PlatformManager : MonoBehaviour
 
     public IEnumerator ActiveObstacle()
     {
-        while (!GameManager.instance.isDie)
+        while (true)
         {
             selectedObstacle = GameManager.Pooling.GetObstacle();
             if (selectedObstacle != null)
@@ -65,10 +65,10 @@ public class PlatformManager : MonoBehaviour
     {
         foreach (GameObject platform in GameManager.Pooling.PlatformList)
             if (platform.activeSelf)
-                platform.SetActive(false);
+                GameManager.Pooling.RetunPlatformPool(platform);
 
         foreach (GameObject obstacle in GameManager.Pooling.obstaclePlatformList)
             if (obstacle.activeSelf)
-                obstacle.SetActive(false);
+                GameManager.Pooling.RetunPlatformPool(obstacle);
     }
 }
