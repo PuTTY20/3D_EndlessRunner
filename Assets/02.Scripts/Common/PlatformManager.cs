@@ -8,7 +8,7 @@ public class PlatformManager : MonoBehaviour
     GameObject selectedPlatform = null;
     GameObject selectedObstacle = null;
 
-    float posZ = 0f;
+    [SerializeField] float posZ = 0f;
 
     void Start()
     {
@@ -42,9 +42,8 @@ public class PlatformManager : MonoBehaviour
 
     public IEnumerator ActiveObstacle()
     {
-        posZ = 0f;
         while (true)
-        {
+        {            
             selectedObstacle = GameManager.Pooling.GetObstacle();
             if (selectedObstacle != null)
             {
@@ -56,7 +55,7 @@ public class PlatformManager : MonoBehaviour
                     selectedObstacle.transform.GetChild(i).gameObject.SetActive(true);
                 #endregion
 
-                selectedObstacle.transform.position = new Vector3(0f, 0, 40f);
+                selectedObstacle.transform.position = new Vector3(0f, 0, 30f);
             }
 
             yield return new WaitForSeconds(3f);

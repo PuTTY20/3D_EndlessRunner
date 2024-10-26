@@ -49,10 +49,11 @@ public class GameManager : MonoBehaviour
     {
         isReset = true;
         isDie = false;
-        StopAllCoroutines();
+        
         Platform.OffAllPlatform();
+
         StartCoroutine(Platform.ActivatePlatforms());
-        StartCoroutine(Platform.ActiveObstacle());
+        
         UI.ShowRanking(false);
         Score.ResetScore();
         _remy.ResetRemy();
