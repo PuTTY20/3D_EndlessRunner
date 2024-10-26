@@ -47,6 +47,9 @@ public class GameManager : MonoBehaviour
 
     public void Reset()
     {
+        Platform.ActivatePlatforms();
+        Platform.ActiveObstacle();
+        
         isReset = true;
 
         isDie = false;
@@ -55,8 +58,6 @@ public class GameManager : MonoBehaviour
         Platform.OffAllPlatform();
         _remy.ResetRemy();
         _startplatform.ResetStartPlatform();
-        Platform.ActivatePlatforms();
-        Platform.ActiveObstacle();
 
         isReset = false;
     }

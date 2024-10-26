@@ -19,15 +19,16 @@ public class MoveObject : MonoBehaviour
         offPos = new Vector3(tr.position.x, tr.position.y, -8f);
     }
 
+    void OnDisable()
+    {
+        tr.position = new Vector3(tr.position.x, tr.position.y, 0);
+        zPos = tr.position.z;
+    }
+
     void Update()
     {
         if (!GameManager.instance.isDie)
             MovePlatform();
-
-        if (GameManager.instance.isDie)
-        {
-            zPos = 0f;
-        }
     }
 
     public void MovePlatform()
