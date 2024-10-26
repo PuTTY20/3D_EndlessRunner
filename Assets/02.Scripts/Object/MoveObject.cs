@@ -6,9 +6,6 @@ public class MoveObject : MonoBehaviour
 {
     Transform tr;
     Vector3 offPos;
-    [SerializeField] Vector3 startPlatformInitPos;
-    [SerializeField] GameObject startPlatform;
-    public readonly string startName = "Start";
     public float zPos = 0f;
     float speed = 0f;
     float initSpeed = 7f;
@@ -20,23 +17,17 @@ public class MoveObject : MonoBehaviour
         tr = transform;
         speed = initSpeed;
         offPos = new Vector3(tr.position.x, tr.position.y, -8f);
-        if(startPlatform != null)
-        startPlatform = GameObject.Find(startName).gameObject;
-
-        if (startPlatform)
-            startPlatformInitPos = transform.position;
     }
 
     void Update()
     {
-        if (startPlatform)
-        {
-            tr.position = Vector3.MoveTowards(tr.position, offPos, 7f * Time.deltaTime);
-        }
-
-        //PlatformMove
-        else
+        if (!GameManager.instance.isDie)
             MovePlatform();
+
+        if (GameManager.instance.isDie)
+        {
+            zPos = 0f;
+        }
     }
 
     public void MovePlatform()
@@ -57,11 +48,5 @@ public class MoveObject : MonoBehaviour
 
         if (tr.position == offPos)
             GameManager.Pooling.RetunPlatformPool(gameObject);
-    }
-
-    public void ResetPlatform()
-    {
-        startPlatform.SetActive(true);
-        startPlatform.transform.position = startPlatformInitPos;
     }
 }

@@ -66,4 +66,7 @@ startPlatform initPos로 초기화
 # 241025
 1. 코드 수정
 2. StartPlatform 부모 Object를 만들어 StartPlatform을 관리하도록 수정
-3. 
+
+# 241026
+Reset을 했을 때는 posZ가 0이 안됨
+플랫폼도 안켜짐 꿀잼^^,,

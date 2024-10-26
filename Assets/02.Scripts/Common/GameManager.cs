@@ -12,6 +12,10 @@ public class GameManager : MonoBehaviour
     public static ObjectPooling Pooling;
 
     RemyCtrl _remy;
+    StartPlatform _startplatform;
+
+    public bool isDie = false;
+    public bool isReset = false;
 
     void Awake()
     {
@@ -29,21 +33,29 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _remy = FindObjectOfType<RemyCtrl>();
+        _startplatform = FindObjectOfType<StartPlatform>();
     }
 
     void Update()
     {
-        if (_remy.isDie)
+        if (isDie)
         {
-            Score.SaveScore();
-            UI.ShowRanking();
+            UI.ShowRanking(true);
         }
     }
 
     public void Reset()
     {
-        _remy.ResetRemy();
+        isReset = true;
+
+        isDie = false;
+        UI.ShowRanking(false);
         Score.ResetScore();
+        Platform.posZ = 0f;
         Pooling.OffAllPlatform();
+        _remy.ResetRemy();
+        _startplatform.ResetStartPlatform();
+
+        isReset = false;
     }
 }

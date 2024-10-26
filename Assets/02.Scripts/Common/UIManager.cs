@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {   
     Transform canvasRank;
     GameObject rankPanel;
+    Image scoreImg;
     Button replay;
     Button exitBtn;
     Text score_txt;
@@ -19,7 +20,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         Transform canvas = GameObject.Find("Canvas").transform;
-        score_txt = canvas.GetChild(0).GetChild(0).GetComponent<Text>();
+        scoreImg = canvas.GetChild(0).GetComponent<Image>();
+        score_txt = scoreImg.transform.GetChild(0).GetComponent<Text>();
         speedUp_txt = canvas.GetChild(1).GetComponent<Text>();
         exitBtn = canvas.GetChild(2).GetComponent<Button>();
         replay = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
@@ -63,9 +65,10 @@ public class UIManager : MonoBehaviour
         speedUp_txt.enabled = false;
     }
 
-    public void ShowRanking()
+    public void ShowRanking(bool isReset)
     {
-        rankPanel.SetActive(true);
+        scoreImg.gameObject.SetActive(!isReset);
+        rankPanel.SetActive(isReset);
         rankTxt.text = GameManager.Score.score.ToString();
     }
 

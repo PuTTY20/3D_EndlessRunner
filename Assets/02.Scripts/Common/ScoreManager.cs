@@ -5,7 +5,6 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     RemyCtrl _remy;
-    List<int> highScore;
 
     public int score = 0;
     float deciamlScore = 0f;
@@ -16,7 +15,6 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
-        highScore = new List<int>();
         addScore = initAddScore;
 
         _remy = FindObjectOfType<RemyCtrl>();
@@ -24,7 +22,7 @@ public class ScoreManager : MonoBehaviour
 
     void Update()
     {
-        if (_remy.isPlatform && !_remy.isDie)
+        if (_remy.isPlatform && !GameManager.instance.isDie && !GameManager.instance.isReset)
             AddToScore();
     }
 
@@ -49,16 +47,5 @@ public class ScoreManager : MonoBehaviour
         score = 0;
         deciamlScore = 0f;
         addScore = initAddScore;
-    }
-
-    public void SaveScore()
-    {
-        highScore.Add(score);
-        highScore.Sort((a, b) => b.CompareTo(a)); // 내림차순 정렬
-    }
-
-    public List<int> GetHighScore()
-    {
-        return highScore;
     }
 }

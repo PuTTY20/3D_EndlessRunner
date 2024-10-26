@@ -9,6 +9,7 @@ public class RemyCtrl : MonoBehaviour
     Animator ani;
     CapsuleCollider col;
 
+    Vector3 initPos;
     Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
     Vector3 curPos;
 
@@ -20,11 +21,7 @@ public class RemyCtrl : MonoBehaviour
     float coolDown = 3f;
     public bool isGround = true;
     public bool isSlide = false;
-    public bool isDie = false;
     public bool isPlatform = true;
-
-    [Header("Reset 관련")]
-    Vector3 initPosition;
 
     void Start()
     {
@@ -32,7 +29,7 @@ public class RemyCtrl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         col = GetComponent<CapsuleCollider>();
-        initPosition = tr.position;
+        initPos = tr.position;
     }
 
     void Update()
@@ -98,17 +95,6 @@ public class RemyCtrl : MonoBehaviour
         isSlide = false;
     }
 
-    // 이 코드로 인해 isGound가 깜빡여 정확한 점프가 불가능해 코드 삭제.
-    // Jump()에서 isGound false 처리
-    // void OnCollisionExit(Collision col)
-    // {
-    //     // 플랫폼에서 나가면 isGround를 false로 설정
-    //     if (col.gameObject.CompareTag("PLATFORM"))
-    //     {
-    //         isGround = false;
-    //     }
-    // }
-
     RaycastHit GetPlatform(Vector3 dir, float distance)
     {
         Physics.Raycast(tr.position + Vector3.up * 0.3f, dir, out RaycastHit hit, distance);
@@ -141,7 +127,7 @@ public class RemyCtrl : MonoBehaviour
             timer += Time.deltaTime;
             if (timer > coolDown)
             {
-                isDie = true;
+                GameManager.instance.isDie = true;
                 timer = 0f;
             }
         }
@@ -151,11 +137,11 @@ public class RemyCtrl : MonoBehaviour
 
     public void ResetRemy()
     {
-        tr.position = initPosition;
+        tr.position = initPos;
         rb.velocity = Vector3.zero;
         isGround = true;
         isSlide = false;
-        isDie = false;
+        GameManager.instance.isDie = false;
         isPlatform = true;
     }
 }

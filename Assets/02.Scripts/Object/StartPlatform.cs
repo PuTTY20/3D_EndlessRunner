@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class StartPlatform : MonoBehaviour
 {
-    Transform tr;
-    Vector3 offPos;
     GameObject start;
-    public float zPos = 0f;
-    float speed = 0f;
-    float initSpeed = 7f;
+    Transform tr;
+    [SerializeField] Vector3 initPos;
+    Vector3 offPos;
+    float speed = 7f;
 
     void Start()
     {
+        start = transform.GetChild(0).gameObject;
         tr = transform;
-        speed = initSpeed;
-        start = tr.GetChild(0).gameObject;
+        initPos = tr.position;
         offPos = new Vector3(tr.position.x, tr.position.y, -8f);
     }
 
@@ -24,11 +23,12 @@ public class StartPlatform : MonoBehaviour
         tr.position = Vector3.MoveTowards(tr.position, offPos, speed * Time.deltaTime);
 
         if (tr.position == offPos)
-        {
             start.SetActive(false);
-            start.transform.position = Vector3.zero;
-        }
     }
 
-    public void ResetStartPlatform() => tr.position = Vector3.zero;
+    public void ResetStartPlatform()
+    {
+        tr.position = initPos;
+        start.SetActive(true);
+    }
 }
