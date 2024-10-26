@@ -45,28 +45,25 @@
 1. Player의 위치에 따른 MainCamera Position 설정
 2. Exit Button 생성
 
-체력 닳거나 땅에 떨어지면 playerDie
-Replay Button 만들기
-score 기록 + 랭킹
-
-LOD 해야됨
-아래로 raycast쏴서 없으면 점프 못하게(바닥에 떨어졌을 때 점프하지 못하도록 막기 위해서)
-
 # 241023
 1. Player 아래로 Raycast를 쏴 Platform에서 떨어졌을 때 점프하지 못하도록 제한.
 
 # 241024
 1. Reset 기능
-objectPooling에서 platform, obstacle 모두 하이라키에 있는거 다 끔
-score 초기화
-speed 초기화
-startPlatform initPos로 초기화
-"player 위치 초기화"
+- objectPooling에서 platform, obstacle 모두 SetActive(false)- 
+- score 초기화
+- speed 초기화
+- startPlatform의 상위 Object를 움직여 startPlatform 관리
+- player 위치 초기화
 
 # 241025
 1. 코드 수정
 2. StartPlatform 부모 Object를 만들어 StartPlatform을 관리하도록 수정
 
 # 241026
-Reset을 했을 때는 posZ가 0이 안됨
-플랫폼도 안켜짐 꿀잼^^,,
+1. Reset 기능 구현
+
+랭킹해야됨 아 하기싫다 ㅋ
+
+체력 닳거나 땅에 떨어지면 playerDie 체력 닳는거 아직 안함
+score 기록 + 랭킹

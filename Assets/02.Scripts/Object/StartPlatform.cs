@@ -6,7 +6,7 @@ public class StartPlatform : MonoBehaviour
 {
     GameObject start;
     Transform tr;
-    [SerializeField] Vector3 initPos;
+    Vector3 initPos;
     Vector3 offPos;
     float speed = 7f;
 
