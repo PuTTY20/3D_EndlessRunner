@@ -22,19 +22,10 @@ public class PlatformManager : MonoBehaviour
             posZ = _move.zPos;
     }
 
-    IEnumerator ActivatePlatforms()
+    public IEnumerator ActivatePlatforms()
     {
-        while (true)
+        while (!GameManager.instance.isDie)
         {
-            #region ObjectPooling을 사용하지 않을 때
-            // //랜덤하게 하나의 플랫폼을 선택하여 활성화
-            // int randomIndex = Random.Range(0, PlatformList.Count);
-            // GameObject selectedPlatform = Instantiate(PlatformList[randomIndex]);
-            // // 위치 설정
-            // selectedPlatform.transform.position = new Vector3(0, 0, 76f);
-            // selectedPlatform.SetActive(true);
-            #endregion
-
             selectedPlatform = GameManager.Pooling.GetPlatform();
 
             if (selectedPlatform != null)
@@ -48,9 +39,9 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    IEnumerator ActiveObstacle()
+    public IEnumerator ActiveObstacle()
     {
-        while (true)
+        while (!GameManager.instance.isDie)
         {
             selectedObstacle = GameManager.Pooling.GetObstacle();
             if (selectedObstacle != null)
@@ -70,4 +61,14 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
+    public void OffAllPlatform()
+    {
+        foreach (GameObject platform in GameManager.Pooling.PlatformList)
+            if (platform.activeSelf)
+                platform.SetActive(false);
+
+        foreach (GameObject obstacle in GameManager.Pooling.obstaclePlatformList)
+            if (obstacle.activeSelf)
+                obstacle.SetActive(false);
+    }
 }
