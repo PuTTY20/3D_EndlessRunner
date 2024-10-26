@@ -600,7 +600,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGround: 1
   isSlide: 0
-  isDie: 0
   isPlatform: 1
 --- !u!114 &238931216
 MonoBehaviour:
@@ -720,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68e88a12405c0b42a25b83912e0808c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initPos: {x: 0, y: 0, z: 0}
 --- !u!1 &581724091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1262,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b74a1d324483d044b8b15c2ce3cab5f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDie: 0
+  isReset: 0
 --- !u!1 &1439627594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,5 +2040,5 @@ SceneRoots:
   - {fileID: 325718934}
   - {fileID: 1926230280}
   - {fileID: 1684001621}
-  - {fileID: 1402886465}
   - {fileID: 789287841}
+  - {fileID: 1402886465}
