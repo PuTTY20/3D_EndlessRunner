@@ -719,7 +719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b68e88a12405c0b42a25b83912e0808c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initPos: {x: 0, y: 0, z: 0}
 --- !u!1 &581724091
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,7 +1196,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 0dbfb6a6f92bd4a4ba70ce49f89af95c, type: 3}
     m_FontSize: 62
     m_FontStyle: 0
     m_BestFit: 0
@@ -1209,7 +1208,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: 
 --- !u!222 &1202297256
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1264,6 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDie: 0
   isReset: 0
+  isRankReset: 0
 --- !u!1 &1439627594
 GameObject:
   m_ObjectHideFlags: 0

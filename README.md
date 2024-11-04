@@ -63,7 +63,8 @@
 # 241026
 1. Reset 기능 구현
 
-랭킹해야됨 아 하기싫다 ㅋ
-
 체력 닳거나 땅에 떨어지면 playerDie 체력 닳는거 아직 안함
-score 기록 + 랭킹
+
+# 241104
+1. PlayerPrefs를 이용한 Ranking 구현
+2. 장애물에 10번 충돌하면 GameOver

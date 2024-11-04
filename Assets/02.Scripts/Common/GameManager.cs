@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public bool isDie = false;
     public bool isReset = false;
 
+    public bool isRankReset = false;
+
     void Awake()
     {
         if (instance == null)
@@ -40,21 +42,27 @@ public class GameManager : MonoBehaviour
     {
         if (isDie)
         {
-            UI.ShowRanking(true);
+            Score.SaveScore();
+            UI.SetRank();
+            UI.OnOffRank(true);
             Platform.OffAllPlatform();
         }
+
+        //#1 Text
+        if (isRankReset)
+            Score.ResetRank();
     }
 
     public void Reset()
     {
         isReset = true;
         isDie = false;
-        
+
         Platform.OffAllPlatform();
 
         StartCoroutine(Platform.ActivatePlatforms());
-        
-        UI.ShowRanking(false);
+
+        UI.OnOffRank(false);
         Score.ResetScore();
         _remy.ResetRemy();
         _startplatform.ResetStartPlatform();

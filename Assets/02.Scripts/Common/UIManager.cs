@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
-{   
+{
     Transform canvasRank;
     GameObject rankPanel;
     Image scoreImg;
@@ -65,11 +65,19 @@ public class UIManager : MonoBehaviour
         speedUp_txt.enabled = false;
     }
 
-    public void ShowRanking(bool isReset)
+    public void OnOffRank(bool active)
     {
-        scoreImg.gameObject.SetActive(!isReset);
-        rankPanel.SetActive(isReset);
-        rankTxt.text = GameManager.Score.score.ToString();
+        scoreImg.gameObject.SetActive(!active);
+        rankPanel.SetActive(active);
+    }
+
+    public void SetRank()
+    {
+        List<int> topScores = GameManager.Score.GetTopScores();
+        string rankText = "";
+        for (int i = 0; i < topScores.Count; i++)
+            rankText += $"{(i + 1).ToString().PadLeft(2, ' ')}. {topScores[i],2}M\n";
+        rankTxt.text = rankText;
     }
 
     void ReplayGame() => GameManager.instance.Reset();

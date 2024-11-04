@@ -29,7 +29,7 @@ public class RemyCtrl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         col = GetComponent<CapsuleCollider>();
-        initPos = tr.position;
+        initPos = new Vector3(0f, tr.position.y, tr.position.z);
     }
 
     void Update()
