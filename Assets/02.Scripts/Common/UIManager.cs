@@ -5,9 +5,12 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    Transform canvas;
     Transform canvasRank;
+    Transform HPtr;
     GameObject rankPanel;
     Image scoreImg;
+    Image HPImg;
     Button replay;
     Button exitBtn;
     Text score_txt;
@@ -19,12 +22,14 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        Transform canvas = GameObject.Find("Canvas").transform;
+        canvas = GameObject.Find("Canvas").transform;
         scoreImg = canvas.GetChild(0).GetComponent<Image>();
         score_txt = scoreImg.transform.GetChild(0).GetComponent<Text>();
         speedUp_txt = canvas.GetChild(1).GetComponent<Text>();
         exitBtn = canvas.GetChild(2).GetComponent<Button>();
         replay = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
+        HPtr = canvas.GetChild(4);
+        HPImg = HPtr.GetChild(0).GetComponent<Image>();
 
         canvasRank = GameObject.Find("Canvas_Rank").transform;
         rankTxt = canvasRank.GetChild(0).GetChild(0).GetComponent<Text>();
@@ -42,7 +47,7 @@ public class UIManager : MonoBehaviour
         CheckScore();
     }
 
-    private void CheckScore()
+    void CheckScore()
     {
         if ((GameManager.Score.score == 100 || GameManager.Score.score == 200) && GameManager.Score.score != lastScore)
         {
@@ -79,6 +84,9 @@ public class UIManager : MonoBehaviour
             rankText += $"{(i + 1).ToString().PadLeft(2, ' ')}. {topScores[i],2}M\n";
         rankTxt.text = rankText;
     }
+
+    public void UpdateHP(int hp)
+        => HPImg.fillAmount = hp * 0.1f;
 
     void ReplayGame() => GameManager.instance.Reset();
 

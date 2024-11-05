@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     RemyCtrl _remy;
     StartPlatform _startplatform;
+    RemyDamage _remyDamage;
 
     public bool isDie = false;
     public bool isReset = false;
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         _remy = FindObjectOfType<RemyCtrl>();
         _startplatform = FindObjectOfType<StartPlatform>();
+        _remyDamage = _remy.GetComponent<RemyDamage>();
     }
 
     void Update()
@@ -48,7 +50,6 @@ public class GameManager : MonoBehaviour
             Platform.OffAllPlatform();
         }
 
-        //#1 Text
         if (isRankReset)
             Score.ResetRank();
     }
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
         Score.ResetScore();
         _remy.ResetRemy();
         _startplatform.ResetStartPlatform();
+        _remyDamage.ResetHP();
 
         isReset = false;
     }

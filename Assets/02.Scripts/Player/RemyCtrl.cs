@@ -10,7 +10,7 @@ public class RemyCtrl : MonoBehaviour
     CapsuleCollider col;
 
     Vector3 initPos;
-    Vector3 initColCenter = new Vector3(0f, 1.9f, 0f);
+    Vector3 initColCenter;
     Vector3 curPos;
 
     float initColHeight = 3.8f;
@@ -29,6 +29,7 @@ public class RemyCtrl : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ani = GetComponent<Animator>();
         col = GetComponent<CapsuleCollider>();
+        initColCenter = new Vector3(0f, 1.9f, 0f);
         initPos = new Vector3(0f, tr.position.y, tr.position.z);
     }
 
@@ -131,12 +132,12 @@ public class RemyCtrl : MonoBehaviour
                 timer = 0f;
             }
         }
-        else
-            timer = 0f;
+        else timer = 0f;
     }
 
     public void ResetRemy()
     {
+        curPos = Vector3.zero;
         tr.position = initPos;
         rb.velocity = Vector3.zero;
         isGround = true;

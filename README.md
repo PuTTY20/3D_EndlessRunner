@@ -67,4 +67,8 @@
 
 # 241104
 1. PlayerPrefs를 이용한 Ranking 구현
-2. 장애물에 10번 충돌하면 GameOver
+
+#  241105
+1. HP UI 생성
+2. 장애물에 10번 충돌하면 HP 감소
+3. Reset했을 때 중간이 아닌 Player가 마지막에 있었던 위치에서 Reset되는 문제를 해결하기 위해 curPos의 값을 Vector3.zero로 변경

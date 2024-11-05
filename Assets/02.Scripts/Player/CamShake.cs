@@ -4,31 +4,18 @@ using UnityEngine;
 
 public class CamShake : MonoBehaviour
 {
-    Transform tr;
     Camera cam;
     Vector3 initPos;
 
-    string obstacleTag = "OBSTACLE";
     float duration = 0.2f;
     float shakeMag = 0.1f;
 
     void Start()
-    {
-        tr = transform;
-        cam = Camera.main;
-    }
+        => cam = Camera.main;
 
-    void OnTriggerEnter(Collider col)
+    public IEnumerator ShakeCamera()
     {
-        if (col.gameObject.CompareTag(obstacleTag))
-        {
-            initPos = cam.transform.position;
-            StartCoroutine(ShakeCamera());
-        }
-    }
-
-    IEnumerator ShakeCamera()
-    {
+        initPos = cam.transform.position;
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
