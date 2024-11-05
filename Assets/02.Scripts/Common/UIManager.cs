@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
         List<int> topScores = GameManager.Score.GetTopScores();
         string rankText = "";
         for (int i = 0; i < topScores.Count; i++)
-            rankText += $"{(i + 1).ToString().PadLeft(2, ' ')}. {topScores[i],2}M\n";
+            rankText += $"{(i + 1).ToString().PadLeft(2, ' ')}. {topScores[i],4}M\n";
         rankTxt.text = rankText;
     }
 
