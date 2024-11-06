@@ -7,6 +7,7 @@ public class RemyDamage : MonoBehaviour
     CamShake _camShake;
 
     readonly string obstacleTag = "OBSTACLE";
+    readonly string coinTag = "COIN";
 
     [SerializeField] int HP = 0;
     int maxHP = 10;

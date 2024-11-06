@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6437076640005094509}
   - component: {fileID: 7340325276591342185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JumpDoor
   m_TagString: OBSTACLE
   m_Icon: {fileID: 0}
@@ -59,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 1267970854108153744, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267970854108153744, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1933007869777157418, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -122,6 +126,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 1267970854108153744, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1933007869777157418, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.79
@@ -183,6 +191,10 @@ PrefabInstance:
     - target: {fileID: 1267970854108153744, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
       propertyPath: m_Name
       value: Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267970854108153744, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1933007869777157418, guid: 8446af894c15e384b828996dc9fab98b, type: 3}
       propertyPath: m_LocalPosition.x

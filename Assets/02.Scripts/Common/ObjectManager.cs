@@ -75,7 +75,7 @@ public class ObjectManager : MonoBehaviour
             {
                 selectedCoin.SetActive(true);
                 float randomX = xPos[Random.Range(0, xPos.Length)];
-                selectedCoin.transform.position = new Vector3(randomX, 4.85f, 20f);
+                selectedCoin.transform.position = new Vector3(0f, 4.85f, 20f);
             }
 
             yield return new WaitForSeconds(0.1f);

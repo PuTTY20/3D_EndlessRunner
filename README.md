@@ -76,10 +76,16 @@
 - Coin Rotate
 - Coin ObjectPooling
 - MoveObject를 상속하는 MoveCoin 생성
+- 
 
 
-
+- OverlapSphere로 주변 콜라이더 탐색해서 Layer가 obstacle이면 위쪽으로 생기거나 할 예정.
 - 몇 개 이상 먹으면 무적상태 만들어야됨
     그 때 속도 빨라져야되고 충돌 싹 다 무시해야됨
     플레이어 색깔도 투명하게 하든가 하지뭐 ㅋ
 - 위치 왼 중간 오 이렇게 x좌표 나오게 해야됨
+
+#1 UI채우는거 수정하기 에셋 찾고
+
+
+/*상속 받았을 때 base.Start()밖에 안쓰면 굳이 쓰지 않아도 됨*/

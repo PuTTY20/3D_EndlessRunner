@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9122561964232762674}
   - component: {fileID: -3438739633157276983}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightLongFlag
   m_TagString: OBSTACLE
   m_Icon: {fileID: 0}
@@ -112,6 +112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: short_flag
       objectReference: {fileID: 0}
+    - target: {fileID: 7590663274167359439, guid: 0898d2849d93dbd4fb5024e0b57d0421, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -186,6 +190,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: short_flag (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7590663274167359439, guid: 0898d2849d93dbd4fb5024e0b57d0421, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -207,6 +215,10 @@ PrefabInstance:
     - target: {fileID: 3748383150325379158, guid: bbbd2516d5fefaf4f8b1255323a992d6, type: 3}
       propertyPath: m_Name
       value: long_flag
+      objectReference: {fileID: 0}
+    - target: {fileID: 3748383150325379158, guid: bbbd2516d5fefaf4f8b1255323a992d6, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4561933328118475500, guid: bbbd2516d5fefaf4f8b1255323a992d6, type: 3}
       propertyPath: m_LocalScale.x
