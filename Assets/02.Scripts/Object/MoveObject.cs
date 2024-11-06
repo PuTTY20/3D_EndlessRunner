@@ -8,7 +8,7 @@ public class MoveObject : MonoBehaviour
     public float zPos = 0f;
     protected float speed = 0f;
     protected float initSpeed = 7f;
-    protected float midleSpeed = 10.5f;   //1.5배 증가 =>
+    protected float midleSpeed = 10.5f;   //1.5배 증가
     protected float maxSpeed = 15.75f;    //2.25배 증가
 
     protected virtual void Start()

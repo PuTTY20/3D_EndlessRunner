@@ -75,6 +75,7 @@
 1. Coin Object 추가
 - Coin Rotate
 - Coin ObjectPooling
+- MoveObject를 상속하는 MoveCoin 생성
 
 
 

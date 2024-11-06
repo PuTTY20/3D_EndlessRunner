@@ -72,10 +72,10 @@ public class ObjectManager : MonoBehaviour
             if (selectedCoin != null)
             {
                 selectedCoin.SetActive(true);
-                selectedCoin.transform.position = new Vector3(0.8f, 4.85f, 10f);
+                selectedCoin.transform.position = new Vector3(0.8f, 4.85f, 20f);
             }
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 

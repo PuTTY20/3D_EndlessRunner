@@ -13,7 +13,6 @@ public class MoveCoin : MoveObject
     protected override void MovePlatform()
     {
         transform.position = Vector3.MoveTowards(transform.position, offPos, speed * Time.deltaTime);
-        zPos = transform.position.z;
 
         if(transform.position == offPos)
             GameManager.Pooling.RetunObjectPool(gameObject);

@@ -2,33 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartPlatform : MonoBehaviour
+public class StartPlatform : MoveObject
 {
     GameObject start;
-    Transform tr;
     Vector3 initPos;
-    Vector3 offPos;
-    float speed = 7f;
 
-    void Start()
+    override protected void Start()
     {
+        base.Start();
+
         start = transform.GetChild(0).gameObject;
-        tr = transform;
-        initPos = tr.position;
-        offPos = new Vector3(tr.position.x, tr.position.y, -8f);
+        initPos = transform.position;
     }
 
-    void Update()
-    {
-        tr.position = Vector3.MoveTowards(tr.position, offPos, speed * Time.deltaTime);
+    protected override void Update()
+        => base.Update();
 
-        if (tr.position == offPos)
+    protected override void MovePlatform()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, offPos, speed * Time.deltaTime);
+
+        if (transform.position == offPos)
             start.SetActive(false);
     }
 
     public void ResetStartPlatform()
     {
-        tr.position = initPos;
+        transform.position = initPos;
         start.SetActive(true);
     }
 }

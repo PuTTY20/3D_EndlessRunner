@@ -37,7 +37,7 @@ public class ObjectPooling : MonoBehaviour
     GameObject coinGroup;
 
     int poolSize = 3;
-    int coinPoolSize = 10;
+    int coinPoolSize = 40;
 
     void Awake()
     {
