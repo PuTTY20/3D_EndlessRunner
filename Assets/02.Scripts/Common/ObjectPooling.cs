@@ -172,7 +172,7 @@ public class ObjectPooling : MonoBehaviour
         return null;
     }
 
-    public void RetunPlatformPool(GameObject platform) => platform.SetActive(false);
+    public void RetunObjectPool(GameObject platform) => platform.SetActive(false);
 
     public void OffAllPlatform()
     {

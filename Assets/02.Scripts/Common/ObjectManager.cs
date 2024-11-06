@@ -72,7 +72,7 @@ public class ObjectManager : MonoBehaviour
             if (selectedCoin != null)
             {
                 selectedCoin.SetActive(true);
-                //selectedCoin.transform.position = new Vector3(고민중, 4.85f, 10f);
+                selectedCoin.transform.position = new Vector3(0.8f, 4.85f, 10f);
             }
 
             yield return new WaitForSeconds(1.0f);
@@ -83,14 +83,14 @@ public class ObjectManager : MonoBehaviour
     {
         foreach (GameObject platform in GameManager.Pooling.PlatformList)
             if (platform.activeSelf)
-                GameManager.Pooling.RetunPlatformPool(platform);
+                GameManager.Pooling.RetunObjectPool(platform);
 
         foreach (GameObject obstacle in GameManager.Pooling.obstaclePlatformList)
             if (obstacle.activeSelf)
-                GameManager.Pooling.RetunPlatformPool(obstacle);
+                GameManager.Pooling.RetunObjectPool(obstacle);
 
         foreach (GameObject coin in GameManager.Pooling.coinList)
             if (coin.activeSelf)
-                GameManager.Pooling.RetunPlatformPool(coin);
+                GameManager.Pooling.RetunObjectPool(coin);
     }
 }

@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class MoveObject : MonoBehaviour
 {
-    Vector3 offPos;
+    protected Vector3 offPos;
     public float zPos = 0f;
-    float speed = 0f;
-    float initSpeed = 7f;
-    float midleSpeed = 10.5f;   //1.5배 증가
-    float maxSpeed = 15.75f;    //2.25배 증가
+    protected float speed = 0f;
+    protected float initSpeed = 7f;
+    protected float midleSpeed = 10.5f;   //1.5배 증가 =>
+    protected float maxSpeed = 15.75f;    //2.25배 증가
 
-    void Start()
+    protected virtual void Start()
     {
         speed = initSpeed;
         offPos = new Vector3(transform.position.x, transform.position.y, -8f);
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (!GameManager.instance.isDie)
             MovePlatform();
     }
 
-    public void MovePlatform()
+    protected virtual void MovePlatform()
     {
         if (GameManager.Score.score > 200)
         {
@@ -40,6 +40,6 @@ public class MoveObject : MonoBehaviour
         zPos = transform.position.z;
 
         if (transform.position == offPos)
-            GameManager.Pooling.RetunPlatformPool(gameObject);
+            GameManager.Pooling.RetunObjectPool(gameObject);
     }
 }
