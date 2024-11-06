@@ -24,7 +24,7 @@ public class RemyDamage : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.&& HP > 0)
+        if (col.transform.parent.TryGetComponent(out MoveObstacle _obstacle) && HP > 0)
         {
             --HP;
             StartCoroutine(_camShake.ShakeCamera());

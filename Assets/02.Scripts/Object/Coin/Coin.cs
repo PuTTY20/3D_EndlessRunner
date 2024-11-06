@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    public float radius = 0.7f;
-    public LayerMask obstacleLayer = 1 << 6;
+    float radius = 1.0f;
+    LayerMask obstacleLayer = 1 << 6;
 
     void Update()
         => CheckForObstacles();
 
-    public void CoinTrigger()
+    public void OffCoin()
         => gameObject.SetActive(false);
 
     void CheckForObstacles()
@@ -18,10 +18,8 @@ public class Coin : MonoBehaviour
         Collider[] hitCol = Physics.OverlapSphere(transform.position, radius, obstacleLayer);
         foreach (var col in hitCol)
         {
-            if(col.gameObject.CompareTag("OBSTACLE"))
-            {
-                
-            }
+            if(col.transform.parent.TryGetComponent(out MoveObstacle _obstacle))
+                OffCoin();
         }
     }
 
