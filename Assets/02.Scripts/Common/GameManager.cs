@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static ObjectPooling Pooling;
 
     RemyCtrl _remy;
-    StartPlatform _startplatform;
+    MoveStart _startplatform;
     RemyDamage _remyDamage;
 
     public bool isDie = false;
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         _remy = FindObjectOfType<RemyCtrl>();
-        _startplatform = FindObjectOfType<StartPlatform>();
+        _startplatform = FindObjectOfType<MoveStart>();
         _remyDamage = _remy.GetComponent<RemyDamage>();
     }
 

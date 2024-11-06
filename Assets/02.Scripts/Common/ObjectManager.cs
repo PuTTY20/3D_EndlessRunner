@@ -45,7 +45,7 @@ public class ObjectManager : MonoBehaviour
     public IEnumerator ActiveObstacle()
     {
         while (true)
-        {            
+        {
             selectedObstacle = GameManager.Pooling.GetObstacle();
             if (selectedObstacle != null)
             {
@@ -66,13 +66,16 @@ public class ObjectManager : MonoBehaviour
 
     public IEnumerator ActiveCoin()
     {
+        float[] xPos = new float[] { -0.8f, 0f, 0.8f };
+
         while (true)
         {
             selectedCoin = GameManager.Pooling.GetCoin();
             if (selectedCoin != null)
             {
                 selectedCoin.SetActive(true);
-                selectedCoin.transform.position = new Vector3(0.8f, 4.85f, 20f);
+                float randomX = xPos[Random.Range(0, xPos.Length)];
+                selectedCoin.transform.position = new Vector3(randomX, 4.85f, 20f);
             }
 
             yield return new WaitForSeconds(0.1f);

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartPlatform : MoveObject
+public class MoveStart : MoveObject
 {
     GameObject start;
     Vector3 initPos;
