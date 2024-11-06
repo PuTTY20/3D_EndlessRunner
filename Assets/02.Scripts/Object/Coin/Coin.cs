@@ -8,21 +8,20 @@ public class Coin : MonoBehaviour
     public LayerMask obstacleLayer = 1 << 6;
 
     void Update()
-    {
-        CheckForObstacles();
-    }
+        => CheckForObstacles();
 
-    public void CoinOnTrigger()
-    {
-        gameObject.SetActive(false);
-    }
+    public void CoinTrigger()
+        => gameObject.SetActive(false);
 
     void CheckForObstacles()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius, obstacleLayer);
-        foreach (var hitCollider in hitColliders)
+        Collider[] hitCol = Physics.OverlapSphere(transform.position, radius, obstacleLayer);
+        foreach (var col in hitCol)
         {
-            Debug.Log("Obstacle detected: " + hitCollider.name);
+            if(col.gameObject.CompareTag("OBSTACLE"))
+            {
+                
+            }
         }
     }
 

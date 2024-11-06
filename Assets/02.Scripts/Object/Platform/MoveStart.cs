@@ -15,7 +15,7 @@ public class MoveStart : MoveObject
         initPos = transform.position;
     }
 
-    protected override void MovePlatform()
+    protected override void MoveObj()
     {
         transform.position = Vector3.MoveTowards(transform.position, offPos, speed * Time.deltaTime);
 

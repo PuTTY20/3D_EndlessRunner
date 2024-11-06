@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ObjectManager : MonoBehaviour
 {
-    MoveObject _move;
+    MovePlatform _movePlatform;
     GameObject selectedPlatform = null;
     GameObject selectedObstacle = null;
     GameObject selectedCoin = null;
 
-    [SerializeField] float posZ = 0f;
+    float posZ = 0f;
 
     void Start()
     {
@@ -20,8 +20,8 @@ public class ObjectManager : MonoBehaviour
 
     void Update()
     {
-        if (_move != null)
-            posZ = _move.zPos;
+        if (_movePlatform != null)
+            posZ = _movePlatform.zPos;
     }
 
     public IEnumerator ActivatePlatforms()
@@ -34,7 +34,7 @@ public class ObjectManager : MonoBehaviour
             if (selectedPlatform != null)
             {
                 selectedPlatform.SetActive(true);
-                _move = selectedPlatform.GetComponent<MoveObject>();
+                _movePlatform = selectedPlatform.GetComponent<MovePlatform>();
                 selectedPlatform.transform.position = new Vector3(0, 0, 84f + posZ);
             }
 
