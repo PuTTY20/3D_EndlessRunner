@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformManager : MonoBehaviour
+public class ObjectManager : MonoBehaviour
 {
     MoveObject _move;
     GameObject selectedPlatform = null;
     GameObject selectedObstacle = null;
+    GameObject selectedCoin = null;
 
     [SerializeField] float posZ = 0f;
 
@@ -62,7 +63,22 @@ public class PlatformManager : MonoBehaviour
         }
     }
 
-    public void OffAllPlatform()
+    public IEnumerator ActiveCoin()
+    {
+        while (true)
+        {
+            selectedCoin = GameManager.Pooling.GetCoin();
+            if (selectedCoin != null)
+            {
+                selectedCoin.SetActive(true);
+                selectedCoin.transform.position = new Vector3(고민중, 4.85f, 10f);
+            }
+
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
+    public void OffAllObject()
     {
         foreach (GameObject platform in GameManager.Pooling.PlatformList)
             if (platform.activeSelf)
@@ -71,5 +87,9 @@ public class PlatformManager : MonoBehaviour
         foreach (GameObject obstacle in GameManager.Pooling.obstaclePlatformList)
             if (obstacle.activeSelf)
                 GameManager.Pooling.RetunPlatformPool(obstacle);
+
+        foreach (GameObject coin in GameManager.Pooling.coinList)
+            if (coin.activeSelf)
+                GameManager.Pooling.RetunPlatformPool(coin);
     }
 }

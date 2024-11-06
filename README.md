@@ -63,8 +63,6 @@
 # 241026
 1. Reset 기능 구현
 
-체력 닳거나 땅에 떨어지면 playerDie 체력 닳는거 아직 안함
-
 # 241104
 1. PlayerPrefs를 이용한 Ranking 구현
 
@@ -72,3 +70,15 @@
 1. HP UI 생성
 2. 장애물에 10번 충돌하면 HP 감소
 3. Reset했을 때 중간이 아닌 Player가 마지막에 있었던 위치에서 Reset되는 문제를 해결하기 위해 curPos의 값을 Vector3.zero로 변경
+
+# 241106
+1. Coin Object 추가
+- Coin Rotate
+- Coin ObjectPooling
+
+
+
+- 몇 개 이상 먹으면 무적상태 만들어야됨
+    그 때 속도 빨라져야되고 충돌 싹 다 무시해야됨
+    플레이어 색깔도 투명하게 하든가 하지뭐 ㅋ
+- 위치 왼 중간 오 이렇게 x좌표 나오게 해야됨

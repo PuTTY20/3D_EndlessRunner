@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     public static UIManager UI;
     public static ScoreManager Score;
-    public static PlatformManager Platform;
+    public static ObjectManager Object;
     public static ObjectPooling Pooling;
 
     RemyCtrl _remy;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
         UI = gameObject.AddComponent<UIManager>();
         Score = gameObject.AddComponent<ScoreManager>();
-        Platform = gameObject.AddComponent<PlatformManager>();
+        Object = gameObject.AddComponent<ObjectManager>();
         Pooling = gameObject.AddComponent<ObjectPooling>();
     }
 
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
             Score.SaveScore();
             UI.SetRank();
             UI.OnOffRank(true);
-            Platform.OffAllPlatform();
+            Object.OffAllObject();
         }
 
         if (isRankReset)
@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour
         isReset = true;
         isDie = false;
 
-        Platform.OffAllPlatform();
+        Object.OffAllObject();
 
-        StartCoroutine(Platform.ActivatePlatforms());
+        StartCoroutine(Object.ActivatePlatforms());
 
         UI.OnOffRank(false);
         Score.ResetScore();

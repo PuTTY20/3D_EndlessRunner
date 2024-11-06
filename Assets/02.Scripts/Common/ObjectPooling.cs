@@ -8,6 +8,9 @@ public class ObjectPooling : MonoBehaviour
     List<GameObject> offPlatformList = new List<GameObject>();
     public List<GameObject> obstaclePlatformList = new List<GameObject>();
     List<GameObject> obstacleOffPlatformList = new List<GameObject>();
+    public List<GameObject> coinList = new List<GameObject>();
+    List<GameObject> coinOffList = new List<GameObject>();
+    
 
     [Header("Platforms")]
     GameObject _default;
@@ -26,9 +29,15 @@ public class ObjectPooling : MonoBehaviour
     GameObject RightLongFlag;
     GameObject RightShortFlag;
 
+    GameObject Coin;
+
     GameObject platformGroup;
     GameObject obstacleGroup;
+    
+    GameObject coinGroup;
+
     int poolSize = 3;
+    int coinPoolSize = 10;
 
     void Awake()
     {
@@ -47,8 +56,11 @@ public class ObjectPooling : MonoBehaviour
         RightLongFlag = Resources.Load<GameObject>("ObstaclePlatform/RightLongFlag");
         RightShortFlag = Resources.Load<GameObject>("ObstaclePlatform/RightShortFlag");
 
+        Coin = Resources.Load<GameObject>("Coin/Coin");
+
         platformGroup = new GameObject("Platform Group");
         obstacleGroup = new GameObject("Obstacle Group");
+        coinGroup = new GameObject("Coin Group");
 
         StartCoroutine(CreatePlatformPool(_default));
         StartCoroutine(CreatePlatformPool(bridge));
@@ -64,6 +76,8 @@ public class ObjectPooling : MonoBehaviour
         StartCoroutine(CreateObstaclePool(MiddleShortFlag));
         StartCoroutine(CreateObstaclePool(RightLongFlag));
         StartCoroutine(CreateObstaclePool(RightShortFlag));
+
+        StartCoroutine(CreateCoinPool(Coin));
     }
 
     // 플랫폼 Pool을 생성하는 함수
@@ -85,6 +99,17 @@ public class ObjectPooling : MonoBehaviour
             var obstacle = Instantiate(obstaclePrefab, obstacleGroup.transform);
             obstacle.SetActive(false);
             obstaclePlatformList.Add(obstacle);
+        }
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    IEnumerator CreateCoinPool(GameObject coinPrefab)
+    {
+        for (int i = 0; i < coinPoolSize; i++)
+        {
+            var coin = Instantiate(coinPrefab, coinGroup.transform);
+            coin.SetActive(false);
+            coinList.Add(coin);
         }
         yield return new WaitForSeconds(0.1f);
     }
@@ -124,6 +149,24 @@ public class ObjectPooling : MonoBehaviour
         {
             int randomIdx = Random.Range(0, obstacleOffPlatformList.Count);
             return obstacleOffPlatformList[randomIdx];
+        }
+
+        return null;
+    }
+
+    public GameObject GetCoin()
+    {
+        coinOffList.Clear();
+        foreach (GameObject coin in coinList)
+        {
+            if (!coin.activeSelf)
+                coinOffList.Add(coin);
+        }
+
+        if (coinOffList.Count > 0)
+        {
+            int randomIdx = Random.Range(0, coinOffList.Count);
+            return coinOffList[randomIdx];
         }
 
         return null;
