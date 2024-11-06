@@ -76,7 +76,7 @@
 - Coin Rotate
 - Coin ObjectPooling
 - MoveObject를 상속하는 MoveCoin 생성
-- 
+- Coin에 닿았을 때 SetActive(false)
 
 
 - OverlapSphere로 주변 콜라이더 탐색해서 Layer가 obstacle이면 위쪽으로 생기거나 할 예정.
