@@ -15,6 +15,7 @@ public class ObjectManager : MonoBehaviour
     {
         StartCoroutine(ActivatePlatforms());
         StartCoroutine(ActiveObstacle());
+        StartCoroutine(ActiveCoin());
     }
 
     void Update()
@@ -71,7 +72,7 @@ public class ObjectManager : MonoBehaviour
             if (selectedCoin != null)
             {
                 selectedCoin.SetActive(true);
-                selectedCoin.transform.position = new Vector3(고민중, 4.85f, 10f);
+                //selectedCoin.transform.position = new Vector3(고민중, 4.85f, 10f);
             }
 
             yield return new WaitForSeconds(1.0f);
