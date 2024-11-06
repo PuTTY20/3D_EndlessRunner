@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class CoinRotate : MonoBehaviour
 {
-    Transform tr;
-
-    void Start()
-    {
-        tr = transform;
-    }
-
     void Update()
-    {
-        tr.Rotate(Vector3.up * 360 * Time.deltaTime);
-    }
+        => transform.Rotate(Vector3.up * 360 * Time.deltaTime);
 }
