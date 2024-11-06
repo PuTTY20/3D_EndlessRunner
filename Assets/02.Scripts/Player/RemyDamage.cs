@@ -6,8 +6,6 @@ public class RemyDamage : MonoBehaviour
 {
     CamShake _camShake;
 
-    readonly string obstacleTag = "OBSTACLE";
-
     int HP = 0;
     int maxHP = 10;
 
@@ -26,7 +24,7 @@ public class RemyDamage : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag(obstacleTag) && HP > 0)
+        if (col.gameObject.&& HP > 0)
         {
             --HP;
             StartCoroutine(_camShake.ShakeCamera());

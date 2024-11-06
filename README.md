@@ -68,15 +68,17 @@
 
 #  241105
 1. HP UI 생성
-2. 장애물에 10번 충돌하면 HP 감소
+2. 장애물에 충돌하면 HP 감소
+- 10번 충돌하면 Game Over
 3. Reset했을 때 중간이 아닌 Player가 마지막에 있었던 위치에서 Reset되는 문제를 해결하기 위해 curPos의 값을 Vector3.zero로 변경
 
 # 241106
-1. Coin Object 추가
+1. MoveObj.cs를 만들고 움직이는 모든 Object들에게 MoveObj 상속
+2. Coin Object 추가
 - Coin Rotate
 - Coin ObjectPooling
 - MoveObject를 상속하는 MoveCoin 생성
-- Coin에 닿았을 때 SetActive(false)
+- Coin에 닿았을 때 SetActive(false) 후 Pool로 return
 
 
 - OverlapSphere로 주변 콜라이더 탐색해서 Layer가 obstacle이면 위쪽으로 생기거나 할 예정.

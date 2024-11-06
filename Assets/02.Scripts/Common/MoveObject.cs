@@ -26,7 +26,7 @@ public class MoveObject : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(transform.position, offPos, speed * Time.deltaTime);
 
-        if(transform.position == offPos)
+        if (transform.position == offPos)
             GameManager.Pooling.RetunObjectPool(gameObject);
     }
 }
