@@ -77,7 +77,6 @@
 2. Coin Object 추가
 - Coin Rotate
 - Coin ObjectPooling
-- MoveObject를 상속하는 MoveCoin 생성
 - Coin에 닿았을 때 SetActive(false) 후 Pool로 return
 
 
