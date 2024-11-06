@@ -20,9 +20,9 @@ public class MovePlatform : MoveObject
         }
         transform.position = Vector3.MoveTowards(transform.position, offPos, speed * Time.deltaTime);
 
-        zPos = transform.position.z;
-
         if (transform.position == offPos)
             GameManager.Pooling.RetunObjectPool(gameObject);
+        zPos = transform.position.z;
+
     }
 }
