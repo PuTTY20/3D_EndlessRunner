@@ -5,19 +5,11 @@ using UnityEngine;
 public class RemyCtrl : MonoBehaviour
 {
     Transform tr;
-    Rigidbody rb;
-    Animator ani;
-    CapsuleCollider col;
+    internal Rigidbody rb;
 
-    Vector3 initPos;
-    Vector3 initColCenter;
-    Vector3 curPos;
+    internal Vector3 initPos;
 
-    float initColHeight = 3.8f;
-    float moveSize = 0.8f;
-    float jumpForce = 5.0f;
-    float damping = 5f;
-    float timer = 0f;
+    float DieTimer = 0f;
     float coolDown = 2f;
     public bool isGround = true;
     public bool isSlide = false;
@@ -27,73 +19,16 @@ public class RemyCtrl : MonoBehaviour
     {
         tr = transform;
         rb = GetComponent<Rigidbody>();
-        ani = GetComponent<Animator>();
-        col = GetComponent<CapsuleCollider>();
-        initColCenter = new Vector3(0f, 1.9f, 0f);
         initPos = new Vector3(0f, tr.position.y, tr.position.z);
     }
 
     void Update()
     {
-        // 좌우 이동 처리
-        MoveHorizontal();
-
-        // 점프
-        if (Input.GetKeyDown(KeyCode.UpArrow) && isGround && !isSlide && isPlatform)
-            StartCoroutine(Jump());
-        // 슬라이드
-        if (Input.GetKeyDown(KeyCode.DownArrow) && !isSlide && isGround)
-            StartCoroutine(Slide());
-
         // 플랫폼 또는 장애물 체크
         CheckPlatform();
 
         // PlayerDie 처리
         DieCheck();
-    }
-
-    void MoveHorizontal()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && curPos.x >= -0.8f)
-            curPos.x -= moveSize;
-
-        if (Input.GetKeyDown(KeyCode.RightArrow) && curPos.x <= 0.8f)
-            curPos.x += moveSize;
-
-        float posX = Mathf.Clamp(curPos.x, -0.8f, 0.8f);
-        curPos = new Vector3(posX, tr.position.y, 0f);
-
-        tr.position = Vector3.Lerp(tr.position, curPos, Time.deltaTime * damping);
-    }
-
-    IEnumerator Jump()
-    {
-        ani.SetTrigger("Jump");
-        rb.AddForce(jumpForce * rb.mass * Vector3.up, ForceMode.Impulse);
-
-        //yield return null;
-        col.center = new Vector3(0f, 2.3f, 0f);
-        col.height = initColHeight / 2f;
-
-        yield return new WaitForSeconds(0.8f);
-
-        col.center = initColCenter;
-        col.height = initColHeight;
-    }
-
-    IEnumerator Slide()
-    {
-        ani.SetTrigger("Slide");
-        isSlide = true;
-        col.center = new Vector3(0f, 0.7f, 0f);
-        col.height = 1.4f;
-
-        yield return new WaitForSeconds(1f);
-
-        col.center = initColCenter;
-        col.height = initColHeight;
-
-        isSlide = false;
     }
 
     RaycastHit GetPlatform(Vector3 dir, float distance)
@@ -125,19 +60,19 @@ public class RemyCtrl : MonoBehaviour
     {
         if (!isPlatform)
         {
-            timer += Time.deltaTime;
-            if (timer > coolDown)
+            DieTimer += Time.deltaTime;
+            if (DieTimer > coolDown)
             {
                 GameManager.instance.isDie = true;
-                timer = 0f;
+                DieTimer = 0f;
             }
         }
-        else timer = 0f;
+        else DieTimer = 0f;
     }
 
     public void ResetRemy()
     {
-        curPos = Vector3.zero;
+        GetComponent<RemyMove>().curPos = Vector3.zero;
         tr.position = initPos;
         rb.velocity = Vector3.zero;
         isGround = true;

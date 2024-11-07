@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    
     public static UIManager UI;
     public static ScoreManager Score;
     public static ObjectManager Object;
@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
 
     public bool isDie = false;
     public bool isReset = false;
-
     public bool isRankReset = false;
+    public bool isInvincible = false;
 
     void Awake()
     {
