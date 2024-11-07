@@ -88,7 +88,7 @@
     Obstacle 충돌 무시
 - Platform, Coin, Obstacle
     Invincible 속도로 변경 후 5초가 지나면 그 전 속도로 돌아감
-
+4. StopAllCoroutines으로 MoveObject.cs를 가진 물체 움직임 멈추기
 
 
 

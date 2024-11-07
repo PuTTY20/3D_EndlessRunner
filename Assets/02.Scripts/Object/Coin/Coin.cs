@@ -32,7 +32,7 @@ public class Coin : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.gray;
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

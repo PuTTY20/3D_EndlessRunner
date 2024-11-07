@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
 
         Object.OffAllObject();
 
-        StartCoroutine(Object.ActivatePlatforms());
+        //StartCoroutine(Object.ActivatePlatforms());
 
         UI.gaugeImg.fillAmount = 0;
         UI.OnOffRank(false);

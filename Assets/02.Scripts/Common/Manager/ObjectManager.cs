@@ -84,6 +84,8 @@ public class ObjectManager : MonoBehaviour
 
     public void OffAllObject()
     {
+        StopAllCoroutines();
+
         foreach (GameObject platform in GameManager.Pooling.PlatformList)
             if (platform.activeSelf)
                 GameManager.Pooling.RetunObjectPool(platform);
@@ -95,5 +97,10 @@ public class ObjectManager : MonoBehaviour
         foreach (GameObject coin in GameManager.Pooling.coinList)
             if (coin.activeSelf)
                 GameManager.Pooling.RetunObjectPool(coin);
+
+        if(GameManager.instance.isDie) return;
+        StartCoroutine(ActivatePlatforms());
+        StartCoroutine(ActiveObstacle());
+        StartCoroutine(ActiveCoin());
     }
 }
