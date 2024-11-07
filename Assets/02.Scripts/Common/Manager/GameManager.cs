@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (isDie)
         {
+            UI.gaugeImg.fillAmount = 0;
             Score.SaveScore();
             UI.SetRank();
             UI.OnOffRank(true);
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(Object.ActivatePlatforms());
 
+        UI.gaugeImg.fillAmount = 0;
         UI.OnOffRank(false);
         Score.ResetScore();
         _remy.ResetRemy();

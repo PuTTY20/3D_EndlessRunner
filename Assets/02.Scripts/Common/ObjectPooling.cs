@@ -10,7 +10,7 @@ public class ObjectPooling : MonoBehaviour
     List<GameObject> obstacleOffPlatformList = new List<GameObject>();
     public List<GameObject> coinList = new List<GameObject>();
     List<GameObject> coinOffList = new List<GameObject>();
-    
+
 
     [Header("Platforms")]
     GameObject _default;
@@ -33,7 +33,7 @@ public class ObjectPooling : MonoBehaviour
 
     GameObject platformGroup;
     GameObject obstacleGroup;
-    
+
     GameObject coinGroup;
 
     int poolSize = 3;
@@ -172,7 +172,8 @@ public class ObjectPooling : MonoBehaviour
         return null;
     }
 
-    public void RetunObjectPool(GameObject platform) => platform.SetActive(false);
+    public void RetunObjectPool(GameObject platform)
+        => platform.SetActive(false);
 
     public void OffAllPlatform()
     {

@@ -8,9 +8,11 @@ public class UIManager : MonoBehaviour
     Transform canvas;
     Transform canvasRank;
     Transform HPtr;
+    Transform gauge;
     GameObject rankPanel;
     Image scoreImg;
     Image HPImg;
+    public Image gaugeImg;
     Button replay;
     Button exitBtn;
     Text score_txt;
@@ -19,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     readonly string speedUp = "SPEED UP!";
     int lastScore = -1;
+    int coin = 0;
 
     void Start()
     {
@@ -30,6 +33,8 @@ public class UIManager : MonoBehaviour
         replay = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
         HPtr = canvas.GetChild(4);
         HPImg = HPtr.GetChild(0).GetComponent<Image>();
+        gauge = canvas.GetChild(5);
+        gaugeImg = gauge.GetChild(1).GetComponent<Image>();
 
         canvasRank = GameObject.Find("Canvas_Rank").transform;
         rankTxt = canvasRank.GetChild(0).GetChild(0).GetComponent<Text>();
@@ -68,6 +73,12 @@ public class UIManager : MonoBehaviour
         }
         yield return new WaitForSeconds(0.8f);
         speedUp_txt.enabled = false;
+    }
+
+    public void GaugeUP(int addCoin)
+    {
+        coin += addCoin;
+        gaugeImg.fillAmount = coin / 100f * 0.125f;
     }
 
     public void OnOffRank(bool active)

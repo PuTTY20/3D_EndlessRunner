@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    float radius = 1.0f;
     LayerMask obstacleLayer = 1 << 6;
+    public int coin = 0;
+    float radius = 1.5f;
 
     void Update()
-        => CheckForObstacles();
+        => ObstacleCheck();
 
-    public void OffCoin()
+    void OffCoin()
         => gameObject.SetActive(false);
 
-    void CheckForObstacles()
+    public void CoinCtrl()
+    {
+        gameObject.SetActive(false);
+        coin++;
+        GameManager.UI.GaugeUP(coin);
+    }
+
+    void ObstacleCheck()
     {
         Collider[] hitCol = Physics.OverlapSphere(transform.position, radius, obstacleLayer);
         foreach (var col in hitCol)
         {
-            if(col.transform.parent.TryGetComponent(out MoveObstacle _obstacle))
+            if (col.transform.parent.TryGetComponent(out MoveObstacle _obstacle))
                 OffCoin();
         }
     }
