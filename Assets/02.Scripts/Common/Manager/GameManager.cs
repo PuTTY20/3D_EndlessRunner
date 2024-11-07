@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    
+
     public static UIManager UI;
     public static ScoreManager Score;
     public static ObjectManager Object;
@@ -53,6 +52,15 @@ public class GameManager : MonoBehaviour
 
         if (isRankReset)
             Score.ResetRank();
+    }
+
+    public IEnumerator InvincibleCtrl()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(5f);
+        isInvincible = false;
+        UI.gaugeImg.fillAmount = 0;
+        UI.coin = 0;
     }
 
     public void Reset()

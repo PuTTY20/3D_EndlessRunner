@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveObject : MonoBehaviour
@@ -9,6 +7,7 @@ public class MoveObject : MonoBehaviour
     protected float initSpeed = 7f;
     protected float midleSpeed = 10.5f;
     protected float maxSpeed = 13f;
+    protected float invincibleSpeed = 15f;
 
     protected virtual void Start()
     {
@@ -24,17 +23,32 @@ public class MoveObject : MonoBehaviour
 
     protected virtual void MoveObj()
     {
-        if (GameManager.Score.score > 200)
+        if (GameManager.instance.isInvincible)
         {
-            speed = maxSpeed;
+            speed = invincibleSpeed;
             Debug.Log(speed);
         }
-        else if (GameManager.Score.score > 100)
+
+        else
         {
-            speed = midleSpeed;
-            Debug.Log(speed);
+            if (GameManager.Score.score > 200)
+            {
+                speed = maxSpeed;
+                Debug.Log(speed);
+            }
+            else if (GameManager.Score.score > 100)
+            {
+                speed = midleSpeed;
+                Debug.Log(speed);
+            }
+
+            else if (GameManager.Score.score > 0)
+            {
+                speed = initSpeed;
+                Debug.Log(speed);
+            }
         }
-        
+
         transform.position = Vector3.MoveTowards(transform.position, offPos, speed * Time.deltaTime);
 
         if (transform.position == offPos)

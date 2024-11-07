@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
     readonly string speedUp = "SPEED UP!";
     int lastScore = -1;
-    int coin = 0;
+    public int coin = 0;
 
     void Start()
     {
@@ -79,6 +79,9 @@ public class UIManager : MonoBehaviour
     {
         coin += addCoin;
         gaugeImg.fillAmount = coin / 100f * 0.125f;
+
+        if (gaugeImg.fillAmount >= 1)
+            StartCoroutine(GameManager.instance.InvincibleCtrl());
     }
 
     public void OnOffRank(bool active)
@@ -99,7 +102,8 @@ public class UIManager : MonoBehaviour
     public void UpdateHP(int hp)
         => HPImg.fillAmount = hp * 0.1f;
 
-    void ReplayGame() => GameManager.instance.Reset();
+    void ReplayGame()
+        => GameManager.instance.Reset();
 
     void ExitGame()
     {

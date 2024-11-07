@@ -82,6 +82,15 @@
 # 241107
 1. Gauge UI 생성
 2. Coin 100개가 모이면 Gauge 한 칸이 차도록 설정
+3. Gauge가 다 차면 5초 유지
+- Player 무적 상태
+    Platform 유무 상관 없음
+    Obstacle 충돌 무시
+- Platform, Coin, Obstacle
+    Invincible 속도로 변경 후 5초가 지나면 그 전 속도로 돌아감
+
+
+
 
 
 
