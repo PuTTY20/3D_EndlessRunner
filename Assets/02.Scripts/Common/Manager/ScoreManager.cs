@@ -13,7 +13,7 @@ public class ScoreManager : MonoBehaviour
     float addScore = 0f;
     float initAddScore = 1f;
     float midAddScore = 1.5f;
-    float maxAddScore = 2.25f;
+    float maxAddScore = 2.5f;
 
     void Start()
     {
