@@ -8,6 +8,7 @@ public class MoveObject : MonoBehaviour
     protected float midleSpeed = 10.5f;
     protected float maxSpeed = 13f;
     protected float invincibleSpeed = 15f;
+    protected float preSpeed = 0f;
 
     protected virtual void Start()
     {
@@ -25,12 +26,19 @@ public class MoveObject : MonoBehaviour
     {
         if (GameManager.instance.isInvincible)
         {
-            speed = invincibleSpeed;
-            Debug.Log(speed);
+            if (speed != invincibleSpeed)
+            {
+                preSpeed = speed;
+                speed = invincibleSpeed;
+            }
         }
 
         else
         {
+            if (speed == invincibleSpeed)
+                speed = preSpeed;
+
+
             if (GameManager.Score.score > 200)
             {
                 speed = maxSpeed;
@@ -39,12 +47,6 @@ public class MoveObject : MonoBehaviour
             else if (GameManager.Score.score > 100)
             {
                 speed = midleSpeed;
-                Debug.Log(speed);
-            }
-
-            else if (GameManager.Score.score > 0)
-            {
-                speed = initSpeed;
                 Debug.Log(speed);
             }
         }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     LayerMask obstacleLayer = 1 << 6;
-    public int coin = 0;
     float radius = 1.5f;
 
     void Update()
@@ -16,9 +15,9 @@ public class Coin : MonoBehaviour
 
     public void CoinCtrl()
     {
+        if(GameManager.instance.isInvincible) return;
         gameObject.SetActive(false);
-        coin++;
-        GameManager.UI.GaugeUP(coin);
+        GameManager.UI.GaugeUP(1);
     }
 
     void ObstacleCheck()
