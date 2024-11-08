@@ -78,7 +78,6 @@ public class UIManager : MonoBehaviour
     public void GaugeUP(int addCoin)
     {
         coin += addCoin;
-        Debug.Log(coin);
         gaugeImg.fillAmount = coin / 100f * 0.125f;
 
         if (gaugeImg.fillAmount >= 1)

@@ -66,16 +66,35 @@ public class ObjectManager : MonoBehaviour
 
     public IEnumerator ActiveCoin()
     {
-        float[] xPos = new float[] { -0.8f, 0f, 0.8f };
-
         while (true)
         {
             selectedCoin = GameManager.Pooling.GetCoin();
             if (selectedCoin != null)
             {
                 selectedCoin.SetActive(true);
-                float randomX = xPos[Random.Range(0, xPos.Length)];
-                selectedCoin.transform.position = new Vector3(0f, 4.85f, 20f);
+                Coin _coin = selectedCoin.GetComponent<Coin>();
+
+                Vector3 position;
+                switch (_coin.coinPos)
+                {
+                    case Coin.COINPOS.LEFT:
+                        position = new Vector3(-0.8f, 4.85f, 20f);
+                        Debug.Log("Coin position set to LEFT");
+                        break;
+                    case Coin.COINPOS.CENTER:
+                        position = new Vector3(0f, 4.85f, 20f);
+                        Debug.Log("Coin position set to CENTER");
+                        break;
+                    case Coin.COINPOS.RIGHT:
+                        position = new Vector3(0.8f, 4.85f, 20f);
+                        Debug.Log("Coin position set to RIGHT");
+                        break;
+                    default:
+                        position = new Vector3(0f, 4.85f, 20f);
+                        Debug.Log("Coin position set to DEFAULT (CENTER)");
+                        break;
+                }
+                selectedCoin.transform.position = position;
             }
 
             yield return new WaitForSeconds(0.1f);
@@ -98,7 +117,7 @@ public class ObjectManager : MonoBehaviour
             if (coin.activeSelf)
                 GameManager.Pooling.RetunObjectPool(coin);
 
-        if(GameManager.instance.isDie) return;
+        if (GameManager.instance.isDie) return;
         StartCoroutine(ActivatePlatforms());
         StartCoroutine(ActiveObstacle());
         StartCoroutine(ActiveCoin());
