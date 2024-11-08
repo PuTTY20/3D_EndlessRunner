@@ -90,11 +90,12 @@
     Invincible 속도로 변경 후 5초가 지나면 그 전 속도로 돌아감
 4. StopAllCoroutines으로 MoveObject.cs를 가진 물체 움직임 멈추기
 
+# 241108
+1. 장애물을 피해 Coin 생성
 
 
 
 
-- OverlapSphere로 주변 콜라이더 탐색해서 Layer가 obstacle이면 위쪽으로 생기거나 할 예정.
 - 몇 개 이상 먹으면 무적상태 만들어야됨
     그 때 속도 빨라져야되고 충돌 싹 다 무시해야됨
     플레이어 색깔도 투명하게 하든가 하지뭐 ㅋ
