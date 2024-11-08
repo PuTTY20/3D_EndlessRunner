@@ -72,29 +72,28 @@ public class ObjectManager : MonoBehaviour
             if (selectedCoin != null)
             {
                 selectedCoin.SetActive(true);
-                Coin _coin = selectedCoin.GetComponent<Coin>();
 
-                Vector3 position;
+                MoveCoin _moveCoin = selectedCoin.GetComponent<MoveCoin>();
+                selectedCoin.transform.position = new Vector3(0f, 4.85f, 20f);
+                
+                Coin _coin = selectedCoin.GetComponent<Coin>();
+                _coin.ObstacleCheck();
+
                 switch (_coin.coinPos)
                 {
                     case Coin.COINPOS.LEFT:
-                        position = new Vector3(-0.8f, 4.85f, 20f);
-                        Debug.Log("Coin position set to LEFT");
+                        _moveCoin.SetOffPos(-0.8f);
                         break;
                     case Coin.COINPOS.CENTER:
-                        position = new Vector3(0f, 4.85f, 20f);
-                        Debug.Log("Coin position set to CENTER");
+                        _moveCoin.SetOffPos(0f);
                         break;
                     case Coin.COINPOS.RIGHT:
-                        position = new Vector3(0.8f, 4.85f, 20f);
-                        Debug.Log("Coin position set to RIGHT");
+                        _moveCoin.SetOffPos(0.8f);
                         break;
                     default:
-                        position = new Vector3(0f, 4.85f, 20f);
-                        Debug.Log("Coin position set to DEFAULT (CENTER)");
+                        _moveCoin.SetOffPos(0f);
                         break;
                 }
-                selectedCoin.transform.position = position;
             }
 
             yield return new WaitForSeconds(0.1f);

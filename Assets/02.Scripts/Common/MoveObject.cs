@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MoveObject : MonoBehaviour
 {
-    protected Vector3 offPos;
+    internal Vector3 offPos;
     protected float speed = 0f;
     protected float initSpeed = 7f;
     protected float midleSpeed = 10.5f;

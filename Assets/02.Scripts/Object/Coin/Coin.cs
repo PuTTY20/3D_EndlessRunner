@@ -8,9 +8,13 @@ public class Coin : MonoBehaviour
 
     LayerMask obstacleLayer = 1 << 6;
     public COINPOS coinPos = COINPOS.CENTER;
-    
+
     void Update()
-        => ObstacleCheck();
+    {
+        Debug.DrawRay(transform.position + (Vector3.left * 0.8f), Vector3.forward * 2f, Color.red);
+        Debug.DrawRay(transform.position, Vector3.forward * 2f, Color.red);
+        Debug.DrawRay(transform.position + (Vector3.right * 0.8f), Vector3.forward * 2f, Color.red);
+    }
 
     void OffCoin()
         => gameObject.SetActive(false);
@@ -23,42 +27,33 @@ public class Coin : MonoBehaviour
         GameManager.UI.GaugeUP(1);
     }
 
-    public void SetCoinPosition(COINPOS position)
-        => coinPos = position;
-
-    void ObstacleCheck()
+    public void ObstacleCheck()
     {
-        RaycastHit hit;
-        Vector3 leftDir = (3 * Vector3.forward + Vector3.left).normalized;
-        Vector3 rightDir = (3 * Vector3.forward + Vector3.right).normalized;
-        bool leftHit = Physics.Raycast(transform.position, leftDir, out hit, 2f, obstacleLayer);
-        bool forwardHit = Physics.Raycast(transform.position, Vector3.forward, out hit, 3f, obstacleLayer);
-        bool rightHit = Physics.Raycast(transform.position, rightDir, out hit, 2f, obstacleLayer);
+        bool forwardHit = Physics.Raycast(transform.position, Vector3.forward, out RaycastHit hit, 4f, obstacleLayer);
+        bool leftHit = Physics.Raycast(transform.position + (Vector3.left * 0.8f), Vector3.forward, out RaycastHit hitL, 4f, obstacleLayer);
+        bool rightHit = Physics.Raycast(transform.position + (Vector3.right * 0.8f), Vector3.forward, out RaycastHit hitR, 4f, obstacleLayer);
 
-        if (leftHit && forwardHit)
-        {
-            coinPos = COINPOS.RIGHT;
-            Debug.Log("Coin position set to RIGHT");
-        }
-
-        if (rightHit && forwardHit)
-        {
-            coinPos = COINPOS.LEFT;
-            Debug.Log("Coin position set to LEFT");
-        }
-
-        if (leftHit && forwardHit && rightHit)
-        {
-            OffCoin();
-        }
-        else if (!leftHit && !forwardHit && !rightHit)
+        if (!forwardHit)
         {
             coinPos = COINPOS.CENTER;
-            Debug.Log("Coin position set to CENTER");
+            Debug.Log("Coin CENTER");
         }
+        else if (forwardHit && !leftHit)
+        {
+            coinPos = COINPOS.LEFT;
+            Debug.Log("Coin LEFT");
+        }
+        else if (forwardHit && !rightHit)
+        {
+            coinPos = COINPOS.RIGHT;
+            Debug.Log("Coin RIGHT");
+        }
+        else if (forwardHit && leftHit && rightHit)
+        {
+            Debug.Log($"forward: {forwardHit}, left: {leftHit}, right: {rightHit}");
 
-        Debug.DrawRay(transform.position, leftDir * 2f, Color.red);
-        Debug.DrawRay(transform.position, Vector3.forward * 3f, Color.red);
-        Debug.DrawRay(transform.position, rightDir * 2f, Color.red);
+            Debug.Log("Coin OFF");
+            OffCoin();
+        }
     }
 }
