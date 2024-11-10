@@ -42,29 +42,25 @@ public class Coin : MonoBehaviour
         bool leftHit = Physics.Raycast(transform.position + (Vector3.left * 0.8f), Vector3.forward, out RaycastHit hitL, 4f, obstacleLayer);
         bool rightHit = Physics.Raycast(transform.position + (Vector3.right * 0.8f), Vector3.forward, out RaycastHit hitR, 4f, obstacleLayer);
 
-        bool backHit = Physics.Raycast(transform.position, Vector3.back, out RaycastHit bhit, 4f, obstacleLayer);
-        bool backleftHit = Physics.Raycast(transform.position + (Vector3.left * 0.8f), Vector3.back, out RaycastHit bhitL, 4f, obstacleLayer);
-        bool backrightHit = Physics.Raycast(transform.position + (Vector3.right * 0.8f), Vector3.back, out RaycastHit bhitR, 4f, obstacleLayer);
-
         bool leftPlatform = Physics.Raycast(transform.position + Vector3.left * 0.3f, Vector3.down, out RaycastHit hitLD, 1f, leftLayer);
         bool rightPlatform = Physics.Raycast(transform.position + Vector3.right * 0.3f, Vector3.down, out RaycastHit hitRD, 1f, rightLayer);
 
-        if (!forwardHit || !backHit)
+        if (!forwardHit)
         {
             coinPos = COINPOS.CENTER;
             Debug.Log("Coin CENTER");
         }
-        else if ((forwardHit && !leftHit) || (backHit && !backleftHit))
+        else if (forwardHit && !leftHit)
         {
             coinPos = COINPOS.LEFT;
             Debug.Log("Coin LEFT");
         }
-        else if ((forwardHit && !rightHit) || (backHit && !backrightHit))
+        else if (forwardHit && !rightHit)
         {
             coinPos = COINPOS.RIGHT;
             Debug.Log("Coin RIGHT");
         }
-        else if ((forwardHit && leftHit && rightHit) || (backHit && backleftHit && backrightHit))
+        else if (forwardHit && leftHit && rightHit)
         {
             Debug.Log($"forward: {forwardHit}, left: {leftHit}, right: {rightHit}");
 

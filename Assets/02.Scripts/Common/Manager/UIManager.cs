@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     GameObject rankPanel;
     Image scoreImg;
     Image HPImg;
+    Image HPFrameImg;
     public Image gaugeImg;
     Button replay;
     Button exitBtn;
@@ -33,6 +34,7 @@ public class UIManager : MonoBehaviour
         replay = canvas.GetChild(3).GetChild(0).GetComponent<Button>();
         HPtr = canvas.GetChild(4);
         HPImg = HPtr.GetChild(0).GetComponent<Image>();
+        HPFrameImg = HPtr.GetChild(1).GetComponent<Image>();
         gauge = canvas.GetChild(5);
         gaugeImg = gauge.GetChild(1).GetComponent<Image>();
 
@@ -75,15 +77,6 @@ public class UIManager : MonoBehaviour
         speedUp_txt.enabled = false;
     }
 
-    public void GaugeUP(int addCoin)
-    {
-        coin += addCoin;
-        gaugeImg.fillAmount = coin / 100f * 0.125f;
-
-        if (gaugeImg.fillAmount >= 1)
-            StartCoroutine(GameManager.instance.InvincibleCtrl());
-    }
-
     public void OnOffRank(bool active)
     {
         scoreImg.gameObject.SetActive(!active);
@@ -99,8 +92,23 @@ public class UIManager : MonoBehaviour
         rankTxt.text = rankText;
     }
 
+    public void GaugeUP(int addCoin)
+    {
+        coin += addCoin;
+        gaugeImg.fillAmount = coin / 100f * 0.125f;
+
+        if (gaugeImg.fillAmount >= 1)
+            StartCoroutine(GameManager.instance.InvincibleCtrl());
+    }
+
     public void UpdateHP(int hp)
         => HPImg.fillAmount = hp * 0.1f;
+
+    public void OnOffHP(bool active)
+    {
+        HPImg.enabled = active;
+        HPFrameImg.enabled = active;
+    }
 
     void ReplayGame()
         => GameManager.instance.Reset();

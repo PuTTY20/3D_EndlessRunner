@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
             Score.SaveScore();
             UI.SetRank();
             UI.OnOffRank(true);
+            UI.OnOffHP(false);
             Object.OffAllObject();
         }
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
 
         UI.gaugeImg.fillAmount = 0;
         UI.OnOffRank(false);
+        UI.OnOffHP(true);
         Score.ResetScore();
         _remy.ResetRemy();
         _startplatform.ResetStartPlatform();
