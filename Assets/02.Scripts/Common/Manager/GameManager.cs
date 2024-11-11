@@ -53,6 +53,8 @@ public class GameManager : MonoBehaviour
 
         if (isRankReset)
             Score.ResetRank();
+
+        Debug.Log(isInvincible);
     }
 
     public IEnumerator InvincibleCtrl()

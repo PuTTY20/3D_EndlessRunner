@@ -7,12 +7,16 @@ public class RemyCtrl : MonoBehaviour
     RemyMove _move;
 
     Transform tr;
+    SkinnedMeshRenderer[] rend;
     internal Rigidbody rb;
 
     Vector3 initPos;
 
     float DieTimer = 0f;
     float timeToDie = 2f;
+    float blinkInterval = 0.1f;
+    float minAlpha = 0.3f;
+    float maxAlpha = 1f;
     public bool isGround = true;
     public bool isSlide = false;
     public bool isPlatform = true;
@@ -22,6 +26,7 @@ public class RemyCtrl : MonoBehaviour
         tr = transform;
         rb = GetComponent<Rigidbody>();
         _move = GetComponent<RemyMove>();
+        rend = GetComponentsInChildren<SkinnedMeshRenderer>();
         initPos = new Vector3(0f, tr.position.y, tr.position.z);
     }
 
@@ -32,6 +37,43 @@ public class RemyCtrl : MonoBehaviour
 
         // PlayerDie 처리
         DieCheck();
+
+        if (GameManager.instance.isInvincible)
+            StartCoroutine(Blink());
+    }
+
+    IEnumerator Blink()
+    {
+        bool isTransparent = false;
+
+        while (GameManager.instance.isInvincible)
+        {
+            // 모든 SkinnedMeshRenderer의 Material에 대해 투명도 조절
+            foreach (var renderer in rend)
+            {
+                foreach (var mat in renderer.materials)
+                {
+                    Color color = mat.color;
+                    color.a = isTransparent ? minAlpha : maxAlpha;
+                    mat.color = color;
+                }
+            }
+
+            // 투명도를 번갈아가며 적용
+            isTransparent = !isTransparent;
+            yield return new WaitForSeconds(blinkInterval);
+        }
+
+        // 깜빡임 종료 후 모든 Material의 투명도를 최댓값으로 설정
+        foreach (var renderer in rend)
+        {
+            foreach (var mat in renderer.materials)
+            {
+                Color color = mat.color;
+                color.a = maxAlpha;
+                mat.color = color;
+            }
+        }
     }
 
     RaycastHit GetPlatform(Vector3 dir, float distance)
