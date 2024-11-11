@@ -14,22 +14,27 @@ public class MoveCoin : MoveObject
     {
         if (GameManager.instance.isInvincible)
         {
-            if (speed != invincibleSpeed)
-            {
-                preSpeed = speed;
-                speed = invincibleSpeed;
-            }
+            speed = invincibleSpeed;
         }
 
         else
         {
-            if (speed == invincibleSpeed)
-                speed = preSpeed;
-
             if (GameManager.Score.score > 200)
+            {
                 speed = maxSpeed;
+                Debug.Log(speed);
+            }
             else if (GameManager.Score.score > 100)
+            {
                 speed = midleSpeed;
+                Debug.Log(speed);
+            }
+
+            else if (GameManager.Score.score > 0)
+            {
+                speed = initSpeed;
+                Debug.Log(speed);
+            }
         }
 
         transform.position = Vector3.MoveTowards(new Vector3(offPos.x, transform.position.y, transform.position.z), offPos, speed * Time.deltaTime);
