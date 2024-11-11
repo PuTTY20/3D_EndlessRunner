@@ -26,6 +26,8 @@ public class RemyDamage : MonoBehaviour
     {
         if (col.transform.parent.TryGetComponent(out MoveObstacle _obstacle) && HP > 0)
         {
+            if (GameManager.instance.isInvincible) return;
+            
             --HP;
             StartCoroutine(_camShake.ShakeCamera());
             GameManager.UI.UpdateHP(HP);

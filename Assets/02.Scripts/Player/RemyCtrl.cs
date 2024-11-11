@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class RemyCtrl : MonoBehaviour
 {
+    RemyMove _move;
+
     Transform tr;
     internal Rigidbody rb;
 
-    internal Vector3 initPos;
+    Vector3 initPos;
 
     float DieTimer = 0f;
-    float coolDown = 2f;
+    float timeToDie = 2f;
     public bool isGround = true;
     public bool isSlide = false;
     public bool isPlatform = true;
@@ -19,6 +21,7 @@ public class RemyCtrl : MonoBehaviour
     {
         tr = transform;
         rb = GetComponent<Rigidbody>();
+        _move = GetComponent<RemyMove>();
         initPos = new Vector3(0f, tr.position.y, tr.position.z);
     }
 
@@ -58,10 +61,10 @@ public class RemyCtrl : MonoBehaviour
 
     void DieCheck()
     {
-        if (!isPlatform)
+        if (!isPlatform && !GameManager.instance.isInvincible)
         {
             DieTimer += Time.deltaTime;
-            if (DieTimer > coolDown)
+            if (DieTimer > timeToDie)
             {
                 GameManager.instance.isDie = true;
                 DieTimer = 0f;
@@ -72,7 +75,7 @@ public class RemyCtrl : MonoBehaviour
 
     public void ResetRemy()
     {
-        GetComponent<RemyMove>().curPos = Vector3.zero;
+        _move.curPos = Vector3.zero;
         tr.position = initPos;
         rb.velocity = Vector3.zero;
         isGround = true;

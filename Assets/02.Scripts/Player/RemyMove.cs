@@ -7,7 +7,7 @@ public class RemyMove : MonoBehaviour
     RemyCtrl remy;
 
     Animator ani;
-    CapsuleCollider col;
+    internal CapsuleCollider col;
 
     internal Vector3 curPos;
     Vector3 initColCenter;

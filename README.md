@@ -83,15 +83,21 @@
 1. Gauge UI 생성
 2. Coin 100개가 모이면 Gauge 한 칸이 차도록 설정
 3. Gauge가 다 차면 5초 유지
-- Player 무적 상태
-    Platform 유무 상관 없음
-    Obstacle 충돌 무시
 - Platform, Coin, Obstacle
     Invincible 속도로 변경 후 5초가 지나면 그 전 속도로 돌아감
 4. StopAllCoroutines으로 MoveObject.cs를 가진 물체 움직임 멈추기
 
 # 241108
 1. 장애물을 피해 Coin 생성
+2. 플랫폼 위치에 맞게 Coin 생성
+
+# 241111
+1. Player 무적 상태
+    invincible 맞춤 속도 설정
+    비어있는 Platform을 채우고 화면에 띄움
+    Obstacle 충돌 무시
+
+
 
 
 

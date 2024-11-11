@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
     public void GaugeUP(int addCoin)
     {
         coin += addCoin;
-        gaugeImg.fillAmount = coin / 100f * 0.125f;
+        gaugeImg.fillAmount = coin / 30f * 0.125f;
 
         if (gaugeImg.fillAmount >= 1)
             StartCoroutine(GameManager.instance.InvincibleCtrl());

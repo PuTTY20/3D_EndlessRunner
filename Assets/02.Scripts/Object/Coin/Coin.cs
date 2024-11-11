@@ -30,6 +30,7 @@ public class Coin : MonoBehaviour
 
     public void CoinCtrl()
     {
+        //Invincible 상태일 때 gauge 차는거 막기 
         if (GameManager.instance.isInvincible) return;
 
         gameObject.SetActive(false);
