@@ -73,11 +73,10 @@ public class GameManager : MonoBehaviour
 
         Object.OffAllObject();
 
-        //StartCoroutine(Object.ActivatePlatforms());
-
         UI.gaugeImg.fillAmount = 0;
         UI.OnOffRank(false);
         UI.OnOffHP(true);
+        UI.coin = 0;
         Score.ResetScore();
         _remy.ResetRemy();
         _startplatform.ResetStartPlatform();
