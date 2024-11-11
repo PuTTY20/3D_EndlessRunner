@@ -117,6 +117,7 @@ public class ObjectManager : MonoBehaviour
                 GameManager.Pooling.RetunObjectPool(coin);
 
         if (GameManager.instance.isDie) return;
+        
         StartCoroutine(ActivatePlatforms());
         StartCoroutine(ActiveObstacle());
         StartCoroutine(ActiveCoin());

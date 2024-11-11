@@ -47,25 +47,13 @@ public class Coin : MonoBehaviour
         bool rightPlatform = Physics.Raycast(transform.position + Vector3.right * 0.3f, Vector3.down, out RaycastHit hitRD, 1f, rightLayer);
 
         if (!forwardHit)
-        {
             coinPos = COINPOS.CENTER;
-            Debug.Log("Coin CENTER");
-        }
         else if (forwardHit && !leftHit)
-        {
             coinPos = COINPOS.LEFT;
-            Debug.Log("Coin LEFT");
-        }
         else if (forwardHit && !rightHit)
-        {
             coinPos = COINPOS.RIGHT;
-            Debug.Log("Coin RIGHT");
-        }
         else if (forwardHit && leftHit && rightHit)
         {
-            Debug.Log($"forward: {forwardHit}, left: {leftHit}, right: {rightHit}");
-
-            Debug.Log("Coin OFF");
             OffCoin();
             return;
         }
