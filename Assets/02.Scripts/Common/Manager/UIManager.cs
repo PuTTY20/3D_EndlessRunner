@@ -101,6 +101,11 @@ public class UIManager : MonoBehaviour
             StartCoroutine(GameManager.instance.InvincibleCtrl());
     }
 
+    public void OnOffGauge(bool active)
+    {
+        gauge.gameObject.SetActive(active);
+    }
+
     public void UpdateHP(int hp)
         => HPImg.fillAmount = hp * 0.1f;
 
