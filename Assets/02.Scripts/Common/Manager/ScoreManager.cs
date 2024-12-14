@@ -6,8 +6,6 @@ public class ScoreManager : MonoBehaviour
 {
     RemyCtrl _remy;
 
-    List<int> scoreList;
-
     public int score = 0;
     float deciamlScore = 0f;
     float addScore = 0f;
@@ -20,7 +18,6 @@ public class ScoreManager : MonoBehaviour
         addScore = initAddScore;
 
         _remy = FindObjectOfType<RemyCtrl>();
-        scoreList = new List<int>();
     }
 
     void Update()
@@ -47,23 +44,23 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveScore()
     {
-        List<int> scores = new List<int>();
+        List<int> scoreList = new List<int>();
 
         for (int i = 0; i < 10; i++)
         {
             if (PlayerPrefs.HasKey($"Score{i}"))
-                scores.Add(PlayerPrefs.GetInt($"Score{i}"));
+                scoreList.Add(PlayerPrefs.GetInt($"Score{i}"));
         }
 
-        if (!scores.Contains(score))
-            scores.Add(score);
+        if (!scoreList.Contains(score))
+            scoreList.Add(score);
 
-        scores.Sort((a, b) => b.CompareTo(a)); // 내림차순 정렬
+        scoreList.Sort((a, b) => b.CompareTo(a)); // 내림차순 정렬
 
         for (int i = 0; i < 10; i++)
         {
-            if (i < scores.Count)
-                PlayerPrefs.SetInt($"Score{i}", scores[i]);
+            if (i < scoreList.Count)
+                PlayerPrefs.SetInt($"Score{i}", scoreList[i]);
 
             else
                 PlayerPrefs.DeleteKey($"Score{i}");
